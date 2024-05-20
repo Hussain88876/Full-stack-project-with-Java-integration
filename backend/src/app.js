@@ -34,7 +34,6 @@ app.use(express.static("public"));
 // Import and use our application routes.
 import routes from "./routes/routes.js";
 app.use("/", routes);
-app.use(express.json());
 
 let user = {
   name: 'Dummy User',
