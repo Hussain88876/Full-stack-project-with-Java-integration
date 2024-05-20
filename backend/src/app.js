@@ -43,6 +43,8 @@ let user = {
 //dummy
 app.get('/user', (req, res) => {
   res.json(user);
+
+ 
 });
 //dummy
 app.patch('/user', (req, res) => {

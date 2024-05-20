@@ -25,6 +25,13 @@
       console.error('error');
     }
   }
+
+  async function seeingIfUpdate(){ // testing to see of backedn is updated. 
+    const response = await fetch('http://localhost:3000/user');
+    const data = await response.json();
+    console.log(data)
+
+  }
 </script>
 
 <div>
@@ -42,12 +49,18 @@
     <div class="container">
       <img src={imgurl} alt="Avatar" class="image" style="width:100%"  />
       <div class="middle">
-        <button class="text" on:click={() => selectImage(imgurl)}>Select</button>
+        <button class="text" on:click={() => selectImage(imgurl), seeingIfUpdate} >Select</button>
       </div>
     </div>
   {/each}
 </div>
 
+
+<div>
+  This is the upload test. 
+
+  <button>Upload</button>
+</div>
 
 
 <style>
