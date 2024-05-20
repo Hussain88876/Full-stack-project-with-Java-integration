@@ -2,30 +2,8 @@
     import imag1 from "$lib/photos/Screenshot 2023-10-13 184803.png"
     import imag2 from "$lib/photos/Screenshot 2023-10-16 082536.png"
 
-    let nodeRef;
-
-    var clone;
-
-function sortClick() {
-  var classes = document.getElementById('btn').classList;
-  if (document.getElementById('myNode')) {
-
-    var myNode = document.getElementById('myNode');
-    clone = myNode.cloneNode(true);
-  }
-
-  if (!classes.contains('firstClick')) {
-    classes.add("firstClick");
-    myNode.parentNode.removeChild(myNode);
-
-  } else if (classes.contains('firstClick')) {
-    classes.remove('firstClick');
-    document.body.appendChild(clone);
 
 
-  }
-
-};
 
 </script>
 
@@ -37,7 +15,7 @@ function sortClick() {
 
   </div>
 
-  <div class="container" bind:this={nodeRef}>
+  <div class="container">
     <img src={imag2} alt="Avatar" class="image" style="width:100%">
     <div class="middle">
         <button class = "text" > Select </button>
@@ -95,7 +73,5 @@ function sortClick() {
   cursor: pointer;
 }
 
-.firstClick {
-  color: red;
-}
+
 </style>
