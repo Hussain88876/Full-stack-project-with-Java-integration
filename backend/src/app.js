@@ -34,6 +34,29 @@ app.use(express.static("public"));
 // Import and use our application routes.
 import routes from "./routes/routes.js";
 app.use("/", routes);
+app.use(express.json());
+
+let user = {
+  name: 'Dummy User',
+  imgurl: ''
+};
+
+
+app.get('/user', (req, res) => {
+  res.json(user);
+});
+
+app.patch('/user', (req, res) => {
+  const { imgurl } = req.body;
+  if (imgurl) {
+    user.imgurl = imgurl;
+    res.sendStatus(204); 
+  } else {
+    res.sendStatus(404); 
+  }
+});
+
+
 
 // Make sure our database is up and running
 import { getDatabase } from "./data/database.js";
@@ -43,3 +66,8 @@ await getDatabase();
 app.listen(PORT, () => {
   console.log(`PGCIT Final Project server listening on port ${PORT}`);
 });
+
+
+
+
+
