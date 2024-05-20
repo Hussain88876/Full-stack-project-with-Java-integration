@@ -1,77 +1,95 @@
 <script>
-    import imag1 from "$lib/photos/Screenshot 2023-10-13 184803.png"
-    import imag2 from "$lib/photos/Screenshot 2023-10-16 082536.png"
+  import { onMount } from 'svelte';
+  import { writable } from 'svelte/store'; // store to see what is happening when we select 
 
+  let user = writable({ name: '', imgurl: '' });
+  let images = [ 'http://localhost:3000/images/Screenshot 2023-10-13 184803.png',`http://localhost:3000/images/Screenshot 2023-10-16 082536.png`] 
+  
+  onMount(async () => { // sets the writible store to the json from the back end as the page loads 
+    const response = await fetch('http://localhost:3000/user');
+    const data = await response.json();
+    user.set(data);
+  });
 
+  async function selectImage(imgurl) { // patches the backend 
+    const response = await fetch('http://localhost:3000/user', { // the patch request to the backend 
+      method: 'PATCH',
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ imgurl }) 
+    });
 
-
+    if (response.status !== 401) { // if response is OK => we update our writble store( This is to see what is going on from the front end side. )
+      user.update(u => ({ ...u, imgurl }));
+    } else {
+      console.error('error');
+    }
+  }
 </script>
 
-<div class="container">
-    <img src={imag1} alt="Avatar" class="image" style="width:100%">
-    <div class="middle">
-        <button class = "text" > Select </button>
-    </div>
-
+<div>
+  <h1>User Information</h1>
+  <div>
+    <strong>Name:</strong> {$user.name}
   </div>
-
-  <div class="container">
-    <img src={imag2} alt="Avatar" class="image" style="width:100%">
-    <div class="middle">
-        <button class = "text" > Select </button>
-    </div>
+  <div>
+    <strong>Selected Image URL:</strong> {$user.imgurl}
   </div>
+</div>
+
+<div class="image-container">
+  {#each images as imgurl} 
+    <div class="container">
+      <img src={imgurl} alt="Avatar" class="image" style="width:100%"  />
+      <div class="middle">
+        <button class="text" on:click={() => selectImage(imgurl)}>Select</button>
+      </div>
+    </div>
+  {/each}
+</div>
 
 
-<div id='btn' onClick='sortClick()'>click</div>
-<div id='myNode'>removed then added</div>
 
-  
-  
 <style>
-    .container {
-  position: relative;
-  width: 50%;
-}
+  .container {
+    position: relative;
+    width: 50%;
+  }
 
-.image {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
-}
+  .image {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+  }
 
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
+  .middle {
+    transition: 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
 
-.container:hover .image {
-  opacity: 0.3;
-}
+  .container:hover .image {
+    opacity: 0.3;
+  }
 
-.container:hover .middle {
-  opacity: 1;
-}
+  .container:hover .middle {
+    opacity: 1;
+  }
 
-.text {
- 
-  color: black;
-  font-size: 16px;
-  padding: 16px 32px;
-}
-
-#btn {
-  cursor: pointer;
-}
-
-
+  .text {
+    color: black;
+    font-size: 16px;
+    padding: 16px 32px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+  }
 </style>

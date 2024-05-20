@@ -33,18 +33,18 @@ app.use(express.static("public"));
 
 // Import and use our application routes.
 import routes from "./routes/routes.js";
-app.use("/", routes);
-
+app.use("/", routes); //dummy
+//dummy
 let user = {
   name: 'Dummy User',
   imgurl: ''
 };
 
-
+//dummy
 app.get('/user', (req, res) => {
   res.json(user);
 });
-
+//dummy
 app.patch('/user', (req, res) => {
   const { imgurl } = req.body;
   if (imgurl) {
