@@ -2,6 +2,7 @@
   import "$lib/css/app.css";
 
   import { page } from "$app/stores";
+  import ImageTest from "$lib/components/UserPhotos.svelte"
   $: path = $page.url.pathname;
 </script>
 
@@ -16,6 +17,7 @@
   Photo testing:
 
   Select: 
+  <ImageTest />
 </div>
 
 <div class="container">
