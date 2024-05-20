@@ -45,11 +45,11 @@
 </div>
 
 <div class="image-container">
-  {#each images as imgurl} 
+  {#each images as imgurl1} 
     <div class="container">
-      <img src={imgurl} alt="Avatar" class="image" style="width:100%"  />
+      <img src={imgurl1} alt="Avatar" class="image" style="width:100%"/>
       <div class="middle">
-        <button class="text" on:click={() => selectImage(imgurl), seeingIfUpdate} >Select</button>
+        <button class="text" on:click={() => selectImage(imgurl1)}>Select</button>
       </div>
     </div>
   {/each}
