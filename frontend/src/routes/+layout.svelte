@@ -12,6 +12,12 @@
   </ul>
 </nav>
 
+<div>
+  Photo testing:
+
+  Select: 
+</div>
+
 <div class="container">
   <slot />
 </div>
