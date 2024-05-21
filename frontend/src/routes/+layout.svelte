@@ -9,9 +9,7 @@
 
   export let data;
 
-  /**
-   * Handle logout by sending a DELETE request to /api/auth, then invalidating.
-   */
+  
   async function handleLogout() {
     const response = await fetch(AUTH_URL, {
       method: "DELETE",
@@ -23,14 +21,13 @@
 
 <nav>
   <ul>
-    <li class="nav-item"><a href="/" class="{path === '/' ? 'active' : ''}"><img src="pk.png" alt="Home" class="nav-img"></a></li>
+    <li class="nav-item"><a href="/" class="{path === '/' ? 'active' : ''}"><img src="pp.png" alt="Home" class="nav-img"></a></li>
     {#if data.isLoggedIn}
       <li><a href="/about" class:active={path.startsWith("/about")}>About me</a></li>
     {/if}
   </ul>
   <span />
   <ul>
-    <!-- Display the login link OR the logout button, not both. -->
     {#if data.isLoggedIn}
       <li><button on:click={handleLogout}>Logout</button></li>
     {:else}
@@ -71,8 +68,8 @@
     }
 
     & :is(a, button) {
-    display: inline-flex; /* Use inline-flex to fit content */
-    align-items: center; /* Center vertically */
+    display: inline-flex; 
+    align-items: center; 
     color: white;
     font-size: 1.1rem;
     font-weight: bold;
@@ -82,15 +79,15 @@
     padding: 0;
     font-family: inherit;
     cursor: pointer;
-    height: 100%; /* Set height of container */
+    height: 100%; 
 
-    /* Center text vertically */
-    line-height: 100%; /* Same as container height */
+    
+    line-height: 100%; 
 
-    transition: transform 0.005s; /* Add transition for smooth effect */
+    transition: transform 0.005s; 
 
     &:hover {
-        transform: scale(1.03); /* Scale the element slightly on hover */
+        transform: scale(1.03); 
     }
 
     &.active {
@@ -115,14 +112,14 @@
   }
 
   .nav-item {
-    /* Add any styles for the list item */
-    display: inline-block; /* Ensures the list items are displayed inline */
+    
+    display: inline-block; 
 }
 
 .nav-img {
-    width: 75px; /* Adjust the width as needed */
-    height: 60px; /* Maintain aspect ratio */
-    /* Add any other styles you need for the image */
+    width: 75px; 
+    height: 60px; 
+    
 }
 
 </style>
