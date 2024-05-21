@@ -23,7 +23,7 @@
 
 <nav>
   <ul>
-    <li><a href="/" class:active={path === "/"}>Home</a></li>
+    <li class="nav-item"><a href="/" class="{path === '/' ? 'active' : ''}"><img src="pk.png" alt="Home" class="nav-img"></a></li>
     {#if data.isLoggedIn}
       <li><a href="/about" class:active={path.startsWith("/about")}>About me</a></li>
     {/if}
@@ -45,7 +45,7 @@
 
 <style>
   nav {
-    background-color: rgb(42, 139, 70);
+    background-image: linear-gradient(139deg, rgb(124, 0, 0), rgb(226, 7, 7), rgb(207, 108, 15), rgb(237, 141, 30));
     padding-left: 20px;
     padding-right: 20px;
     box-shadow: 0 5px 3px lightgray;
@@ -60,28 +60,45 @@
     }
 
     & li {
-      padding: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 0%;
+      padding-bottom: 0%;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0);
       }
     }
 
     & :is(a, button) {
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-decoration: none;
-      background-color: transparent;
-      border: 0;
-      padding: 0;
-      font-family: inherit;
-      cursor: pointer;
+    display: inline-flex; /* Use inline-flex to fit content */
+    align-items: center; /* Center vertically */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+    height: 100%; /* Set height of container */
 
-      &.active {
-        text-decoration: underline;
-      }
+    /* Center text vertically */
+    line-height: 100%; /* Same as container height */
+
+    transition: transform 0.005s; /* Add transition for smooth effect */
+
+    &:hover {
+        transform: scale(1.03); /* Scale the element slightly on hover */
     }
+
+    &.active {
+        text-decoration: underline;
+    }
+}
+
+
 
     & > span {
       flex-grow: 1;
@@ -96,4 +113,16 @@
       width: 100%;
     }
   }
+
+  .nav-item {
+    /* Add any styles for the list item */
+    display: inline-block; /* Ensures the list items are displayed inline */
+}
+
+.nav-img {
+    width: 75px; /* Adjust the width as needed */
+    height: 60px; /* Maintain aspect ratio */
+    /* Add any other styles you need for the image */
+}
+
 </style>
