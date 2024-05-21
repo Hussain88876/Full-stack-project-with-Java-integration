@@ -7,6 +7,10 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
+
+
+
+
 // Set's our port to the PORT environment variable, or 3000 by default if the env is not configured.
 const PORT = process.env.PORT ?? 3000;
 
@@ -33,29 +37,16 @@ app.use(express.static("public"));
 
 // Import and use our application routes.
 import routes from "./routes/routes.js";
-app.use("/", routes); //dummy
-//dummy
-let user = {
-  name: 'Dummy User',
-  imgurl: ''
-};
+app.use("/", routes); 
 
-//dummy
-app.get('/user', (req, res) => {
-  res.json(user);
 
- 
-});
-//dummy
-app.patch('/user', (req, res) => {
-  const { imgurl } = req.body;
-  if (imgurl) {
-    user.imgurl = imgurl;
-    res.sendStatus(204); 
-  } else {
-    res.sendStatus(404); 
-  }
-});
+// creating a way to access all photos from the frontend 
+
+
+
+
+// possible file upload through multer middlware (nmp i multer - add to read me)
+
 
 
 
