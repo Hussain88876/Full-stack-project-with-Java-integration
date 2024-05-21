@@ -28,8 +28,8 @@ router.post("/", upload.single("image-file"), async (req, res) => {
     const originalname = req.file.originalname;
     const fileExtension = originalname.substring(originalname.lastIndexOf("."));
 
-    //const newFileName = uuid() + fileExtension; notfdoing this cuz not sure whats wrong with uuid
-    const newFileName= originalnamem+ fileExtension;
+    //const newFileName = uuid() + fileExtension; not doing this cuz not sure whats wrong with uuid
+    const newFileName= originalname + fileExtension;
     console.log(newFileName);
   
     // Move the file using fs package. We can do this using rename operations
