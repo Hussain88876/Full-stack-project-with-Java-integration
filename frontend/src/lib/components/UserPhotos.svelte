@@ -8,13 +8,13 @@
   let images = [ 'http://localhost:3000/images/Screenshot 2023-10-13 184803.png',`http://localhost:3000/images/Screenshot 2023-10-16 082536.png`] 
   
   onMount(async () => { // sets the writible store to the json from the back end as the page loads 
-    const response = await fetch(`${PUBLIC_API_BASE_URL}/user`);
+    const response = await fetch(`${PUBLIC_API_BASE_URL}/userSelect`);
     const data = await response.json();
     user.set(data);
   });
 
   async function selectImage(imgurl) { // patches the backend 
-    const response = await fetch(`${PUBLIC_API_BASE_URL}/user`, { // the patch request to the backend 
+    const response = await fetch(`${PUBLIC_API_BASE_URL}/userSelect`, { // the patch request to the backend 
       method: 'PATCH',
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -29,7 +29,7 @@
   }
 
   async function seeingIfUpdate(){ // testing to see of backedn is updated. 
-    const response = await fetch(`${PUBLIC_API_BASE_URL}/user`);
+    const response = await fetch(`${PUBLIC_API_BASE_URL}/userSelect`);
     const data = await response.json();
     console.log(data)
 
