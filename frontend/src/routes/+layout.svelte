@@ -1,7 +1,7 @@
 <script>
   import "$lib/css/app.css";
   import { AUTH_URL } from "$lib/js/api-urls.js";
-
+  import ArticleNavbar from "$lib/components/ArticleNavbar.svelte";
   import { page } from "$app/stores";
   import { invalidateAll } from "$app/navigation";
   $: path = $page.url.pathname;
@@ -40,7 +40,10 @@
 </nav>
 
 <div class="container">
-  <slot />
+  <ArticleNavbar articles={data.articles} />
+  <div>
+    <slot />
+  </div>
 </div>
 
 <style>
@@ -89,11 +92,9 @@
   }
 
   .container {
-    width: 1200px;
-    margin: 0 auto;
-
-    @media (max-width: 1200px) {
-      width: 100%;
-    }
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 3rem;
+    margin-top: 1rem;
   }
 </style>

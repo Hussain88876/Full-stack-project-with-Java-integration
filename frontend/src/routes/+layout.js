@@ -1,4 +1,5 @@
 import { USER_URL } from "$lib/js/api-urls.js";
+import { PUBLIC_ARTICLES_URL } from "$env/static/public";
 
 /**
  * This load function will load data shared across all pages - the login data.
@@ -7,10 +8,26 @@ import { USER_URL } from "$lib/js/api-urls.js";
  * manage to get a 200 OK response, we will store the provided user data. Otherwise, we will set it to undefined.
  */
 export async function load({ fetch }) {
-  const response = await fetch(USER_URL, { credentials: "include" });
-  if (response.status === 401) return { isLoggedIn: false };
+  const [userResponse, articlesResponse] = await Promise.all([
+    fetch(USER_URL, { credentials: "include" }),
+    fetch(PUBLIC_ARTICLES_URL)
+  ]);
 
-  const user = await response.json();
-  const isLoggedIn = !!user;
-  return { user, isLoggedIn };
+  //handle user data
+  let user;
+  let isLoggedIn = false;
+  if (userResponse.status === 200) {
+    user = await userResponse.json();
+    isLoggedIn = !!user;
+  } else {
+    user = null;
+  }
+
+  // Handle articles data
+  let articles = [];
+  if (articlesResponse.ok) {
+    articles = await articlesResponse.json();
+  }
+
+  return { user, isLoggedIn, articles };
 }
