@@ -1,10 +1,13 @@
 <script>
+  // this is from example 15 but modified for our purposes. 
     import { PUBLIC_API_BASE_URL } from "$env/static/public";
+    import { createEventDispatcher } from "svelte"; // going to try and dispatch the upload event to get uploaded image into the array in the main component 
   
     let filesToUpload;
     let messageToSend;
   
     let serverResponse = null;
+    const eventDispatch = createEventDispatcher();
   
     /**
      * Handles form submission. Packages up the fi
@@ -25,6 +28,10 @@
       });
   
       serverResponse = await response.json();
+      if (response.status !== 401) {
+      eventDispatch(`upload`, { imageUrl: `http://localhost:3000${serverResponse.imageUrl}` });
+
+    }
     }
   </script>
 
@@ -41,7 +48,7 @@
     bind:files={filesToUpload}
     required
   />
-  <label for="message">Message:</label>
-  <input type="text" name="message" bind:value={messageToSend} required />
+  <!--<label for="message">Message:</label>-->
+  <!--<input type="text" name="message" bind:value={messageToSend} required />-->
   <button type="submit">Upload</button>
 </form>

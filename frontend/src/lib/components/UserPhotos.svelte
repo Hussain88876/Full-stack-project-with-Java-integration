@@ -2,10 +2,11 @@
   import {PUBLIC_API_BASE_URL} from "$env/static/public";
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store'; // store to see what is happening when we select 
+
   import FileUpload from './FileUpload.svelte';
 
-  let user = writable({ name: '', imgurl: '' });
-  let images = [ 'http://localhost:3000/images/Screenshot 2023-10-13 184803.png',`http://localhost:3000/images/Screenshot 2023-10-16 082536.png`] 
+  let user = writable({ name: "", imgurl: "" });
+  let images = writable ([ `http://localhost:3000/images/1.jpg`,`http://localhost:3000/images/2.jpg`]); // Made this into a writable store, so i can add to it the event 
   
   onMount(async () => { // sets the writible store to the json from the back end as the page loads 
     const response = await fetch(`${PUBLIC_API_BASE_URL}/userSelect`);
@@ -24,8 +25,13 @@
     if (response.status !== 401) { // if response is OK => we update our writble store( This is to see what is going on from the front end side. )
       user.update(u => ({ ...u, imgurl }));
     } else {
-      console.error('error');
+      console.error("error");
     }
+  }
+
+  function handleUpload(event) {
+    const { imageUrl } = event.detail;
+    images.update(imgs => [...imgs, imageUrl]);
   }
 
   async function seeingIfUpdate(){ // testing to see of backedn is updated. 
@@ -47,7 +53,7 @@
 </div>
 
 <div class="image-container">
-  {#each images as imgurl1} 
+  {#each $images as imgurl1} 
     <div class="container">
       <img src={imgurl1} alt="Avatar" class="image" style="width:100%"/>
       <div class="middle">
@@ -58,7 +64,7 @@
 </div>
 
 
-<FileUpload/>
+<FileUpload on:upload={handleUpload}/>
 
 
 <style>
