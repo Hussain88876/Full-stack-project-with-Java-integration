@@ -1,5 +1,5 @@
 import express from "express";
-import { postArticle } from "../../db/article-dao.js";
+import { getArticleByID, postArticle } from "../../db/article-dao.js";
 import {getAllArticles} from "../../db/article-dao.js";
 
 const router = express.Router();
@@ -32,6 +32,14 @@ router.get("/", async (req, res) => {
 } catch {
     return res.sendStatus(422);
     }
+});
+
+//Get article by article id
+router.get("/:article_id", async (req, res) => {
+    let article_id = req.params.article_id;
+    let article = getArticleByID(article_id);
+    console.log(article);
+    return res.json(article);
 });
 
 //Edit article

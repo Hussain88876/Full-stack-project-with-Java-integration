@@ -1,12 +1,9 @@
 <script>
+    import Article from "$lib/components/Article.svelte";
 
-    let article;
+    export let data;
+    $: article = data;
 
 </script>
 
-<h1>{article.title}</h1>
-<div>
-    <p class="author-name">{article.username}</p>
-    {@html article.text}
-    <p class="article-date">{article.date}</p>
-</div>
+<Article article = {article}></Article>

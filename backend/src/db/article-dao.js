@@ -14,7 +14,6 @@ export async function postArticle(title, image, user_id, text, date) {
   return postResult.changes > 0;
 }
 
-
 export async function getAllArticles() {
   const db = await getDatabase();
   const articles = await db.all(`
@@ -25,5 +24,10 @@ export async function getAllArticles() {
   return articles;
 }
 
+export async function getArticleByID(id){
+  const db = await getDatabase();
+  const articleByID = await db.get('SELECT * FROM Articles WHERE article_id = ?', id);
+  return articleByID;
+}
 
 
