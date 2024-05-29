@@ -1,5 +1,5 @@
 import express from "express";
-import { postArticle, getAllArticles, getArticleByID, deleteArticle, deleteArticleAsAdmin } from "../../db/article-dao.js";
+import { postArticle, getAllArticles, getArticleByID, deleteArticle, deleteArticleAsAdmin, updateArticle } from "../../db/article-dao.js";
 
 const router = express.Router();
 
@@ -67,6 +67,23 @@ router.delete("/:article_id", async (req, res) => {
     return res.sendStatus(422);
   }
 });
+
+router.patch("/:article_id", async (req, res) => {
+    try {
+    let article_id = req.params.article_id;
+    let title = req.body.title;
+    let text = req.body.text;
+    let image = req.body.image;
+    let user_id = req.body.user_id;
+    let dateNow = new Date().toISOString().slice(0, 10);
+
+    const updated = await updateArticle(article_id, title, image, user_id, text, dateNow);
+    return res.sendStatus(updated ? 204 : 404);
+    } catch {
+    return res.sendStatus(422);
+    }
+});
+
 
 //Sort article, need to specify the sort options
 router.get("/sort/{sort_options}", async (req, res) => {});

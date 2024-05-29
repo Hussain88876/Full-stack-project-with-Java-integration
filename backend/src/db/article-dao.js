@@ -48,5 +48,13 @@ export async function deleteArticleAsAdmin(article_id) {
   return deleteComm.changes > 0;
 }
 
+export async function updateArticle(article_id, title, image, user_id, text, date) {
+  const db = await getDatabase();
+  const updateResult = await db.run(`UPDATE Articles SET title = ?, image = ?, user_id = ?, text = ?, date = ?WHERE id = ?`, title, image, user_id, text, date, article_id);
+
+  // Return true if changes applied, false otherwise
+  return updateResult.changes > 0;
+}
+
 
 

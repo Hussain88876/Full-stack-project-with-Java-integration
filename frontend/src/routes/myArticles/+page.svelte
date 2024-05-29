@@ -2,7 +2,6 @@
   // Import the DisplayArticles component
   import DisplayArticles from '$lib/components/DisplayArticles.svelte';
   import DisplayComments from '$lib/components/DisplayComments.svelte';
-  import UserArticle from '$lib/components/UserArticle.svelte';
 
   export let data;
   
