@@ -21,7 +21,7 @@
 
 <nav>
   <ul>
-    <li class="nav-item"><a href="/" class="{path === '/' ? 'active' : ''}"><img src="/images/logo.png" alt="Home" class="nav-img"></a></li>
+    <li class="nav-item"><a href="/" class="{path === '/' ? 'active' : ''}"><img src="/images/logoNew.png" alt="Home" class="nav-img"></a></li>
     {#if data.isLoggedIn}
       <li><a href="/profile" class:active={path.startsWith("/profile")}>Profile</a></li>
       <li><a href="/postArticle" class:active={path.startsWith("/postArticle")}>Post Articles</a></li>
@@ -72,7 +72,7 @@
     display: inline-flex; 
     align-items: center; 
     color: #fff;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: bold;
     text-decoration: none;
     background-color: transparent;
@@ -118,10 +118,10 @@
 }
 
 .nav-img {
-    width: 75px; 
-    height: 60px; 
+    width: 55px; 
+    height: 55px; 
     cursor: pointer;
-    
+    opacity: 0.5;
 }
 
 </style>
