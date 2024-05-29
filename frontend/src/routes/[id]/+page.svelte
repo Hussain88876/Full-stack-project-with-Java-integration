@@ -176,10 +176,14 @@ async function deleteArticle() {
     .article-post {
         max-width: 600px;
         padding: 40px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 8px;
+    text-align: left;
+    transition: transform 0.3s ease;
+    margin-right: 20px; 
+    margin-left: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px); }
 
     .article-title {
         font-size: 2em;
