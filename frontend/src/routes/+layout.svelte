@@ -45,11 +45,9 @@
 
 <style>
   nav {
-    background-image: linear-gradient(139deg, rgb(124, 0, 0), rgb(226, 7, 7), rgb(207, 108, 15), rgb(237, 141, 30));
-    padding-left: 20px;
-    padding-right: 20px;
-    box-shadow: 0 5px 3px lightgray;
-    display: flex;
+      height: 12%;
+      display: flex;
+      align-items: center;
 
     & > ul {
       list-style: none;
@@ -73,8 +71,8 @@
     & :is(a, button) {
     display: inline-flex; 
     align-items: center; 
-    color: white;
-    font-size: 1.1rem;
+    color: #fff;
+    font-size: 13px;
     font-weight: bold;
     text-decoration: none;
     background-color: transparent;
@@ -122,6 +120,7 @@
 .nav-img {
     width: 75px; 
     height: 60px; 
+    cursor: pointer;
     
 }
 

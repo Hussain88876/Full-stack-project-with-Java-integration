@@ -50,14 +50,16 @@
   <title>Articles</title>
 </svelte:head>
 
-<SearchBar/>
-<h1>Articles</h1>
+<h1></h1>
 
+<div class = "toolbar">
+<SearchBar/>
 <div class="sort-buttons">
   <span class="sort-text">Sort:</span>
   <button class="sort-button" on:click={() => sortArticles('username')}>Username</button>
   <button class="sort-button" on:click={() => sortArticles('title')}>Title</button>
   <button class="sort-button" on:click={() => sortArticles('date')}>Date</button>
+</div>
 </div>
 
 {#if q !=null && articles.length > 0}
@@ -98,16 +100,18 @@
   }
 
   .article-tile {
-      width: calc(30.33% - 20px);
-      margin-bottom: 20px;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      text-align: left;
-      transition: transform 0.3s ease;
-      margin-right: 20px; 
-      margin-left: 20px; 
-  }
+    width: calc(30.33% - 20px);
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 8px;
+    text-align: left;
+    transition: transform 0.3s ease;
+    margin-right: 20px; 
+    margin-left: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px); 
+}
 
   .article-tile:hover {
       transform: scale(1.05); 
@@ -125,29 +129,47 @@
   }
 
   .sort-buttons {
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-  }
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 
-  .sort-text {
-      margin-right: 10px;
-      font-weight: bold;
-  }
+.sort-text {
+    margin-right: 10px;
+    font-weight: bold;
+    color: rgb(224, 224, 224);
+}
 
-  .sort-button {
-      cursor: pointer;
-      color: blue;
-      text-decoration: underline;
-      background: none;
-      border: none;
-      padding: 0;
-      font: inherit;
-      outline: inherit;
-  }
+.sort-button {
+    cursor: pointer;
+    color: rgb(224, 224, 224);
+    text-decoration: none;
+    background-color: transparent;
+    border: 1px solid rgb(142, 142, 142);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font: inherit;
+    outline: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
 
-  .sort-button:not(:last-child) {
-      margin-right: 10px;
-  }
+.sort-button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.sort-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.sort-buttons {
+  margin-left: auto; 
+}
 </style>
