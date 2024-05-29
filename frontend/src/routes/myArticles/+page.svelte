@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { USER_URL } from '$lib/js/api-urls.js';
   import { decodeHtml, formatDate } from '$lib/js/utils';
-  import UserArticle from '$lib/components/UserArticle.svelte';
 
   export let data;
 
