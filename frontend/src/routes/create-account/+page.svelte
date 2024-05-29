@@ -1,6 +1,6 @@
 <script>
   import { invalidate } from "$app/navigation";
-  import { NEWUSER_URL } from "$lib/js/api-urls.js";
+  import { USER_URL } from "$lib/js/api-urls.js";
   import { onMount } from "svelte";
   import ImageUpload from "$lib/components/ImageUpload.svelte";
   import { writable } from "svelte/store";
@@ -45,7 +45,7 @@
       return;
     }
 
-    const response = await fetch(NEWUSER_URL, {
+    const response = await fetch(USER_URL, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -63,7 +63,7 @@
   
   async function checkName(){
     username_error = null;
-    const response = await fetch(NEWUSER_URL);
+    const response = await fetch(USER_URL);
     const userList = await response.json()
     userList.forEach(user => {
       if(user.username == username){

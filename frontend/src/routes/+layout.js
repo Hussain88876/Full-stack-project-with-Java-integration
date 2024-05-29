@@ -7,7 +7,7 @@ import { USER_URL } from "$lib/js/api-urls.js";
  * manage to get a 200 OK response, we will store the provided user data. Otherwise, we will set it to undefined.
  */
 export async function load({ fetch }) {
-  const response = await fetch(USER_URL, { credentials: "include" });
+  const response = await fetch(`${USER_URL}/me`, { credentials: "include" });
   if (response.status === 401) return { isLoggedIn: false };
 
   const user = await response.json();

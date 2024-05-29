@@ -142,7 +142,7 @@ async function deleteArticle() {
     }}
 </script>
 
-
+<!-- this is a single article -->
 <div class="container">
     <article class="article-post">
         <h1 class="article-title">{data.title}</h1>
