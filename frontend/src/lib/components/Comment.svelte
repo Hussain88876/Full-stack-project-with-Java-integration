@@ -4,24 +4,13 @@
 
   export let user;
   export let comment, article_id;
+  export let onCommentPosted;
+  export let onDelete;
 
   async function deleteComment(comment_id) {
-    let user_id = user.user_id;
-    let is_admin = user.is_admin;
-
-    try {
-      const response = await fetch(`${COMMENTS_URL}/${comment_id}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id, is_admin })
-      });
-
-      // Remove the deleted comment from the comments array
-      comments = comments.filter((comment) => comment.comment_id !== comment_id);
-    } catch (error) {
-      console.error("Error deleting comment: ", error);
-    }
+   await onDelete(comment_id); // Call the passed delete function
   }
+
 </script>
 
 {#if comment}
@@ -32,13 +21,13 @@
       <span>time: {comment.time} {comment.date}</span>
       <p>{comment.desc}</p>
       {#if user.isLoggedIn}
-        <button on:click={deleteComment(comment.comment_id)}>DELETE COMMENT</button>
-        <CommentForm {user} {article_id} parent_comment_id={comment.comment_id} />
+        <button on:click={() => deleteComment(comment.comment_id)}>DELETE COMMENT</button>
+        <CommentForm {onCommentPosted} {user} {article_id} parent_comment_id={comment.comment_id} />
       {/if}
       <li>
         {#if comment.children}
           {#each comment.children as child}
-            <svelte:self {user} comment={child} {article_id} />
+            <svelte:self {onCommentPosted} {user} comment={child} {article_id} {onDelete}/>
           {/each}
         {/if}
       </li>

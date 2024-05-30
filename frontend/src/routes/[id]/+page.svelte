@@ -109,7 +109,7 @@
       getLikeCount();
       checkIfUserLiked();
       handleEnableButton();
-      comments = await fetchComments(articleId);
+      comments = await fetchComments(articleId) || [];
     }
   });
   // delete
@@ -148,6 +148,7 @@
       return comments;
     } catch (error) {
       console.error("Error fetching comments:", error);
+      return [];
     }
   }
   
@@ -156,6 +157,42 @@
     newComment.desc = decodeHtml(newComment.desc);
     newComment.date = formatDate(newComment.date);
     comments = [...comments, newComment];
+  }
+
+  async function deleteComment(comment_id) {
+    let user_id = data.user_id;
+    let is_admin = data.is_admin;
+
+    try {
+      const response = await fetch(`${COMMENTS_URL}/${comment_id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id, is_admin })
+      });
+
+      // Check if the request was successful
+      if (response.ok) {
+        // Remove the deleted comment from the comments array
+        comments = removeCommentAndChildren(comments, comment_id);
+      } else {
+        console.error("Error deleting comment: ", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting comment: ", error);
+    }
+  }
+
+  function removeCommentAndChildren(comments, comment_id) {
+    return comments
+      .map(comment => {
+        if (comment.comment_id === comment_id) {
+          return null;
+        } else if (comment.children) {
+          comment.children = removeCommentAndChildren(comment.children, comment_id);
+        }
+        return comment;
+      })
+      .filter(comment => comment !== null);
   }
 </script>
 
@@ -187,7 +224,7 @@
 <h2>Others comments</h2>
 {#if comments}
   {#each comments as comment}
-    <Comment user = {data} {comment} article_id={articleId}/>
+    <Comment onCommentPosted = {handleCommentPosted} user = {data} {comment} article_id={articleId} onDelete={deleteComment}/>
   {/each}
 {:else}
   <p>Comments empty</p>

@@ -1,6 +1,5 @@
 <script>
   import { COMMENTS_URL } from "$lib/js/api-urls";
-  import { load } from "../../routes/+layout";
   export let user, article_id, parent_comment_id;
   export let onCommentPosted;
 
