@@ -33,7 +33,15 @@ export async function getUserWithCredentials(username, password) {
 
 export async function getUserList() {
   const db = await getDatabase();
-  return await db.all("SELECT * from Users");
+  const users = await db.all(`
+    SELECT Users.user_id, Users.username, Users.firstName, Users.lastName, Users.dob, 
+           Users.is_admin, Users.desc, Users.avatar, Users.password, 
+           COUNT(Articles.article_id) AS article_count
+    FROM Users
+    LEFT JOIN Articles ON Users.user_id = Articles.user_id
+    GROUP BY Users.user_id
+  `);
+  return users;
 }
 
 /**

@@ -1,7 +1,13 @@
 import express from "express";
 import { requiresAuthentication } from "../../middleware/auth-middleware.js";
-import { createUser, updateUser, getUserList, deleteUser, deleteUserAsAdmin } from "../../db/users-dao.js";
-import {getArticleByUserID} from "../../db/article-dao.js"
+import {
+  createUser,
+  updateUser,
+  getUserList,
+  deleteUser,
+  deleteUserAsAdmin
+} from "../../db/users-dao.js";
+import { getArticleByUserID } from "../../db/article-dao.js";
 
 const router = express.Router();
 
@@ -33,7 +39,7 @@ router.patch("/me", requiresAuthentication, async (req, res) => {
   try {
     const isUpdated = await updateUser(req.user.user_id, req.body);
     return res.sendStatus(isUpdated ? 204 : 404);
-  } catch (error){
+  } catch (error) {
     console.error("Error:", error);
     return res.sendStatus(422);
   }
@@ -42,37 +48,47 @@ router.patch("/me", requiresAuthentication, async (req, res) => {
 //Create new user
 router.post("/", async (req, res) => {
   console.log(req.body);
-  
-  try{
+
+  try {
     const created = createUser(req.body);
     return res.sendStatus(created ? 204 : 404);
-  }catch{
+  } catch {
     return res.sendStatus(422);
   }
 });
 
 //Return all user list
-router.get("/", async (req, res) => {
-  const userList = await getUserList();
-  return res.json(userList);
+router.get("/", requiresAuthentication, async (req, res) => {
+  try {
+    const is_admin = req.body;
+    let userList;
+
+    if (is_admin) {
+      userList = await getUserList();
+    } else {
+      return res.sendStatus(403);
+    }
+    return res.json(userList);
+  } catch (error) {
+    console.error("Error: ", error);
+    return res.sendStatus(401);
+  }
 });
 
-router.get("/:user_id/articles", async(req, res) => {
+router.get("/:user_id/articles", async (req, res) => {
   let user_id = req.params.user_id;
   let userArticles = await getArticleByUserID(user_id);
   return res.json(userArticles);
 });
 
 //User login
-router.post("/login", async(req, res) => {
-});
+router.post("/login", async (req, res) => {});
 
 //User logput
-router.post("/logout", async(req, res) => {
-});
+router.post("/logout", async (req, res) => {});
 
 //Delete user
-router.delete("/:user_id", async (req, res) => {
+router.delete("/:user_id", requiresAuthentication, async (req, res) => {
   try {
     const { user_id, is_admin } = req.body;
 
@@ -83,10 +99,10 @@ router.delete("/:user_id", async (req, res) => {
     } else {
       deleted = await deleteUser(user_id);
     }
-    return res.sendStatus(deleted ? 204 : 404);
+    return res.sendStatus(deleted ? 204 : 403);
   } catch (error) {
     console.error("Error deleting user: ", error);
-    return res.sendStatus(422);
+    return res.sendStatus(401);
   }
 });
 
