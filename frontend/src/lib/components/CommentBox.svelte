@@ -1,7 +1,7 @@
 <script>
   import { COMMENTS_URL } from "$lib/js/api-urls";
 
-  export let user;
+  export let comment_id;
   export let onCommentPosted;
 
   let desc = "";

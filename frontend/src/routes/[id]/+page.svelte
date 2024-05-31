@@ -1,10 +1,14 @@
 <script>
-import { decodeHtml, formatDate } from "$lib/js/utils";
-import { onMount } from "svelte";
-import { ART_URL }from "$lib/js/api-urls"
-import { invalidate } from "$app/navigation";
-import { goto } from "$app/navigation";
-export let data;
+  import { decodeHtml, formatDate } from "$lib/js/utils";
+  import { onMount } from "svelte";
+  import { ART_URL } from "$lib/js/api-urls";
+  import { COMMENTS_URL } from "$lib/js/api-urls";
+  import { invalidate } from "$app/navigation";
+  import { goto } from "$app/navigation";
+  import Comment from "$lib/components/Comment.svelte";
+  import CommentForm from "$lib/components/CommentForm.svelte";
+
+  export let data;
 
   let likeCount;
   $: likeNumber = likeCount;
@@ -14,6 +18,7 @@ export let data;
   let error = false;
   let success = false;
   let buttonEnabled = true;
+  let comments = [];
 
   async function handleEnableButton() {
     if (userId == null) {
@@ -32,9 +37,9 @@ export let data;
     const result = await response.json();
     likeCount = result;
 
-    success = response.status === 204;
-    error != success;
-    console.log(likeCount);
+      success = response.status===204;
+      error != success
+      console.log(likeCount)
 
     if (success) invalidate(`${ART_URL}/${articleId}/like`);
   }
@@ -98,21 +103,19 @@ export let data;
     }
   }
 
-
-
-onMount(()=>{{
-     getLikeCount();
-    checkIfUserLiked();
-    handleEnableButton();
-}})
-
-
-// delete
-
+  onMount(async () => {
+    {
+      getLikeCount();
+      checkIfUserLiked();
+      handleEnableButton();
+      comments = await fetchComments(articleId);
+      console.log(comments);
+    }
+  });
+  // delete
   async function deleteArticle() {
     let user_id = data.user.user_id;
     let is_admin = data.user.is_admin;
-
     try {
       const response = await fetch(`${ART_URL}/${data.article_id}`, {
         method: "DELETE",
@@ -131,11 +134,27 @@ onMount(()=>{{
     }
   }
 
-
-
-  function goEdit (){
-    goto(`/ ${articleId} /articleEdit`)
+  export async function fetchComments(articleId) {
+    try {
+      const response = await fetch(`${COMMENTS_URL}/${articleId}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch article comments");
+      }
+      const comments = await response.json();
+      comments.forEach((comment) => {
+        comment.desc = decodeHtml(comment.desc);
+        comment.date = formatDate(comment.date);
+      });
+      return comments;
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
   }
+
+  function goEdit(){
+    goto(`/${articleId}/articleEdit`);
+  }
+
 </script>
 
 <div class="container">
@@ -156,7 +175,6 @@ onMount(()=>{{
     </div>
   </article>
 </div>
-
 <button on:click={likeOperation} disabled={!buttonEnabled} class="like-button">Like</button>
 <div class="like-text">current like count is {likeNumber}</div>
 
@@ -167,8 +185,37 @@ onMount(()=>{{
 {/if}
 {/if}
 
+<div class="background-test">
+{#if data.isLoggedIn}
+<h2>Leave your comment!</h2>
+<CommentForm {data} article_id={articleId} parent_comment_id={null}/>
+{/if}
+
+<h2>Others comments</h2>
+{#if comments}
+  {#each comments as comment}
+    <Comment {data} {comment} article_id={articleId}/>
+  {/each}
+{:else}
+  <p>Comments empty</p>
+{/if}
+</div>
 
 <style>
+  .background-test{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    background-color: #ddd;
+  }
+
   .container {
       display: flex;
       justify-content: center;
