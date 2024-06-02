@@ -45,10 +45,13 @@
 </div>
 
 <style>
-  nav {
+   nav {
       height: 12%;
       display: flex;
       align-items: center;
+      justify-content: flex-start;
+      margin-left: 40px;
+      margin-right: 40px;
 
     & > ul {
       list-style: none;

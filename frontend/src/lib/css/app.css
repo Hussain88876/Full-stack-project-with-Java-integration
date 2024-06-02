@@ -11,6 +11,15 @@ body {
     padding-left: 8%;
     padding-right: 8%;
     box-sizing: border-box;
+  overflow: hidden; /* Prevent scrolling */
+    
+  }
+ 
+.container {
+  /* Adjust container styles as needed */
+  width: 100%;
+
+  box-sizing: border-box;
 }
  
 .container {
