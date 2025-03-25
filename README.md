@@ -1,8 +1,30 @@
 # Full Stack website with Java backend integration
- This was a collaborative project where a full stack website was built in two weeks. 
+This was a collaborative project where a full-stack website was built in two weeks. It utalises APIs and a database to make permanent local changes regarding account creation, editing accounts, uploading images and posts. 
+
+The project consists of a social media/blogging system that incorporates essential and intermediate programming principles such as authentication and password hashing
  
-The project consists of a social media/blogging system that incorporates essential and intermediate principles such as authentication and password hashing
- 
+ **Technologies**
+ - Svelte
+ - Java
+ - Javascript
+ - NodeJS
+ - Express
+ - API
+ - SQLite
+
+**Features** 
+- User Authentication
+- Admin Authentication
+- Password hashing/salting 
+- Permanent creation of user accounts
+- Permanent upload pictures/comments/blogs
+- Like and unlike articles
+- Permanent editing of profile
+- Permanent deletion of profile
+- Java application integration
+
+# How to install
+  
 **Backend**
 - npm install
 - npm run dev to set up server
