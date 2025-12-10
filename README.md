@@ -1,4 +1,5 @@
 # Full Stack website with Java backend integration
+Note: uses node v20 
 This was a collaborative project where a full-stack website was built in two weeks. It utalises APIs and a database to make permanent local changes regarding account creation, editing accounts, uploading images and posts. 
 
 The project consists of a social media/blogging system that incorporates essential and intermediate programming principles such as authentication and password hashing
