@@ -1,42 +1,62 @@
-# Full Stack website with Java backend integration
-Note: uses node v20 
+# Full Stack Social Platform with Java Integration
 
-This was a collaborative project where a full-stack website was built in two weeks. It utalises APIs and a database to make permanent local changes regarding account creation, editing accounts, uploading images and posts. 
+> **Prerequisite:** This project utilises Node v20.
 
-The project consists of a social media/blogging system that incorporates essential and intermediate programming principles such as authentication and password hashing
- 
- **Technologies**
- - Svelte
- - Java
- - Javascript
- - NodeJS
- - Express
- - API
- - SQLite
+This was a collaborative project developed over a two-week sprint. It is a full-stack blogging and social media system that utilises RESTful APIs and a SQLite database to handle **Data Persistence** (permanent local changes) regarding account creation, content management, and administrative controls.
 
-**Features** 
-- User Authentication
-- Admin Authentication
-- Password hashing/salting 
-- Permanent creation of user accounts
-- Permanent upload pictures/comments/blogs
-- Like and unlike articles
-- Permanent editing of profile
-- Permanent deletion of profile
-- Java application integration
+Uniquely, this project integrates a **Java Swing GUI** as a dedicated backend administration tool, demonstrating cross-application communication.
 
-# How to install
-  
-**Backend**
-- npm install
-- npm run dev to set up server
+## Core Technologies
+This project incorporates essential and intermediate programming principles, including secure authentication and database management.
 
-**Frontend**
-- npm install
-- npm run dev for server
+* **Frontend:** Svelte, JavaScript
+* **Backend:** Node.js, Express
+* **Database:** SQLite
+* **Desktop Admin:** Java (Swing)
+* **Security:** bcrypt (Password hashing/salting)
 
-**Java swing integration**
-- This project integrates a java GUI to the backend. 
-- the GUI requires an admin only log in.
-- The Admin username is johndoe and their password is password123
-- The Admin will see all users in a table and then by selecting a row, they will then be taken to another panel where they can delete the user permanently. 
+## Features
+
+### User Platform (Svelte/Node.js)
+* **Secure Authentication:** User registration and login flows.
+* **Security:** Implementation of password hashing and salting.
+* **CRUD Operations:** Permanent creation, editing, and deletion of user profiles.
+* **Content Management:** Permanent uploading of pictures, blogs, and comments.
+* **Interactivity:** Ability to like and unlike articles.
+
+### Admin Dashboard (Java Swing)
+* **Cross-Platform Integration:** A Java desktop application integrated directly with the backend.
+* **Admin Authentication:** Secure, admin-only login gate.
+* **User Management:** Visualise all users in a data table.
+* **Administrative Control:** Select specific users to permanently delete them from the database.
+
+## Installation & Setup
+
+### 1. Backend Setup
+Navigate to the server directory to install dependencies and start the API.
+
+```bash
+npm install
+npm run dev
+```
+
+### 2. Frontend Setup
+Navigate to the client directory to launch the Svelte application.
+
+```bash
+npm install
+npm run dev
+```
+
+### 3. Java Admin Integration
+The Java GUI allows for administrative control over the backend data.
+
+1.  Ensure the Backend server (Step 1) is running.
+2.  Launch the Java application.
+3.  **Log in using the Admin Credentials:**
+    * **Username:** `johndoe`
+    * **Password:** `password123`
+4.  **Usage:** The Admin will see all users populated in a table. By selecting a row, you will be taken to a management panel where you can permanently delete the selected user.
+
+## Future Roadmap
+* **UI Modernisation:** Overhaul the user interface to a more modern standard (Pending availability between current SaaS projects).
