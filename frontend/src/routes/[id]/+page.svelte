@@ -231,7 +231,7 @@
 <style>
   :global(html),
   :global(body) {
-    /* Remove zoom hack, handle sizing with efficient CSS */
+    zoom: 0.9;
   }
 
   .container {
