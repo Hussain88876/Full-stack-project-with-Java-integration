@@ -28,31 +28,34 @@
   }
 </script>
 
-<nav>
-  <ul>
-    <li class="nav-item">
-      <a href="/" class={path === "/" ? "active" : ""}
-        ><img src="/images/logoNew.png" alt="Home" class="nav-img" /></a
-      >
-    </li>
-    {#if data.isLoggedIn}
-      <li><a href="/profile" class:active={path.startsWith("/profile")}> Profile</a></li>
-      <li></li>
-      <li>
-        <a href="/postArticle" class:active={path.startsWith("/postArticle")}>Post Articles</a>
-      </li>
-    {/if}
-  </ul>
-  <span />
-  <ul>
-    {#if data.isLoggedIn}
-      <li><button on:click={handleLogout}>Logout</button></li>
-    {:else}
-      <li>
-        <a href="/login" class:active={path.startsWith("/login")} on:click={loginClick}>Login</a>
-      </li>
-    {/if}
-  </ul>
+<nav class="glass-nav">
+  <div class="nav-content">
+    <a href="/" class="nav-logo">
+      <img src="/images/logoNew.png" alt="Home" />
+    </a>
+
+    <ul class="nav-links">
+      {#if data.isLoggedIn}
+        <li><a href="/profile" class:active={path.startsWith("/profile")}>Profile</a></li>
+        <li>
+          <a href="/postArticle" class:active={path.startsWith("/postArticle")}>Post Article</a>
+        </li>
+      {/if}
+    </ul>
+
+    <div class="nav-actions">
+      {#if data.isLoggedIn}
+        <button on:click={handleLogout} class="btn-logout">Logout</button>
+      {:else}
+        <a
+          href="/login"
+          class="btn-login"
+          class:active={path.startsWith("/login")}
+          on:click={loginClick}>Login</a
+        >
+      {/if}
+    </div>
+  </div>
 </nav>
 
 <div class="container">
@@ -60,82 +63,139 @@
 </div>
 
 <style>
-  nav {
-    height: 12%;
+  :global(body) {
+    padding-top: 80px; /* Space for fixed nav */
+  }
+
+  .glass-nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    height: 70px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+    z-index: 1000;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    margin-left: 40px;
-    margin-right: 40px;
+    justify-content: center;
+  }
 
-    & > ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 2px;
-    }
+  .nav-content {
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    & li {
-      padding-left: 10px;
-      padding-right: 10px;
-      padding-top: 0%;
-      padding-bottom: 0%;
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+  }
 
-      &:hover {
-        background-color: rgba(255, 255, 255, 0);
-      }
-    }
+  .nav-logo:hover {
+    transform: scale(1.05);
+  }
 
-    & :is(a, button) {
-      display: inline-flex;
-      align-items: center;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
-      text-decoration: none;
-      background-color: transparent;
-      border: 0;
-      padding: 0;
-      font-family: inherit;
-      cursor: pointer;
-      height: 100%;
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+    opacity: 0.9;
+  }
 
-      line-height: 100%;
+  .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 32px;
+  }
 
-      transition: transform 0.005s;
+  .nav-links a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 4px 0;
+  }
 
-      &:hover {
-        transform: scale(1.03);
-      }
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--text-main);
+  }
 
-      &.active {
-        text-decoration: underline;
-      }
-    }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+    transform-origin: right;
+  }
 
-    & > span {
-      flex-grow: 1;
-    }
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-login,
+  .btn-logout {
+    border: none;
+    background: var(--primary);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  }
+
+  .btn-login:hover,
+  .btn-logout:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
   }
 
   .container {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 24px;
+  }
 
-    @media (max-width: 1200px) {
+  @media (max-width: 768px) {
+    .glass-nav {
+      top: 0;
       width: 100%;
+      border-radius: 0;
+      border-top: none;
+      border-left: none;
+      border-right: none;
     }
-  }
 
-  .nav-item {
-    display: inline-block;
-  }
-
-  .nav-img {
-    width: 55px;
-    height: 55px;
-    cursor: pointer;
-    opacity: 0.5;
+    .nav-links {
+      display: none; /* Mobile menu to be implemented if requested, keeping simple for now to match verified functionality */
+    }
   }
 </style>

@@ -58,7 +58,6 @@
   <title>Articles</title>
 </svelte:head>
 
-
 <div class="toolbar">
   <SearchBar />
   <div class="sort-buttons">
@@ -130,36 +129,31 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-height: 83vh; 
+    max-height: 83vh;
     margin-top: 60px;
-    overflow-y: auto; 
-    padding-right: 20px; 
+    overflow-y: auto;
+    padding-right: 20px;
   }
 
-  
   .articles-container::-webkit-scrollbar {
-    width: 8px; 
+    width: 8px;
   }
 
-  
   .articles-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1); 
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
   }
 
-  
   .articles-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3); 
-    border-radius: 8px; 
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
   }
 
-  
   .articles-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5); 
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .article-tile {
-
     width: 400px;
     height: 180px;
     margin-top: 5px;
@@ -173,7 +167,7 @@
     margin-left: 20px;
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(4px);
-    overflow: hidden; 
+    overflow: hidden;
   }
 
   .article-tile:hover {
@@ -188,7 +182,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-
   }
 
   .author-name {
@@ -245,8 +238,6 @@
     color: white;
     transform: translateY(-2px);
   }
-
-  
 
   .toolbar {
     display: flex;

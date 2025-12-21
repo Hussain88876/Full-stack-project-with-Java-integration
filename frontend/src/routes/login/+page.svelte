@@ -1,10 +1,9 @@
 <script>
   import { goto } from "$app/navigation";
   import { LOGIN_URL } from "$lib/js/api-urls.js";
-  import SignupForm from "$lib/components/SignupForm.svelte"
-  import { fade } from 'svelte/transition';
-  import { onMount } from 'svelte';
-
+  import SignupForm from "$lib/components/SignupForm.svelte";
+  import { fade } from "svelte/transition";
+  import { onMount } from "svelte";
 
   let username = "";
   let password = "";
@@ -32,18 +31,18 @@
     }
   }
 
-function toggleSignUpForm() {
-  createAccountMode = !createAccountMode
-}
+  function toggleSignUpForm() {
+    createAccountMode = !createAccountMode;
+  }
 
-function handleLoginClick(event) {
+  function handleLoginClick(event) {
     createAccountMode = false;
   }
 
   onMount(() => {
-    window.addEventListener('loginClick', handleLoginClick);
+    window.addEventListener("loginClick", handleLoginClick);
     return () => {
-      window.removeEventListener('loginClick', handleLoginClick);
+      window.removeEventListener("loginClick", handleLoginClick);
     };
   });
 </script>
@@ -52,14 +51,12 @@ function handleLoginClick(event) {
   <title>Login</title>
 </svelte:head>
 
-
 {#if createAccountMode}
   <div transition:fade>
     <SignupForm />
   </div>
 {:else}
-
-<!-- {#if showLoginForm} Show the login form if showLoginForm is true -->
+  <!-- {#if showLoginForm} Show the login form if showLoginForm is true -->
   <form on:submit|preventDefault={handleSubmit}>
     <label for="username">Username:</label>
     <input type="text" name="username" bind:value={username} required />
@@ -71,17 +68,14 @@ function handleLoginClick(event) {
       <span class="error">Could not log in with those credentials, please try again.</span>
     {/if}
   </form>
-<!-- {:else} Show the SignupForm component if showLoginForm is false -->
-
+  <!-- {:else} Show the SignupForm component if showLoginForm is false -->
 {/if}
 
 <style>
-
-:global(html),
-    :global(body){
-      zoom: 0.9;
-    }
-
+  :global(html),
+  :global(body) {
+    zoom: 0.9;
+  }
 
   form {
     display: flex;
@@ -114,16 +108,13 @@ function handleLoginClick(event) {
     border-color: #555555;
     outline: none;
   }
-  
-
-
 
   button {
     grid-column: 1 / 3;
     cursor: pointer;
     color: rgb(224, 224, 224);
     text-decoration: none;
-    background-color:  rgba(66, 66, 66, 0.4);
+    background-color: rgba(66, 66, 66, 0.4);
     border: 1px solid rgb(142, 142, 142);
     border-radius: 4px;
     padding: 8px 12px;
@@ -144,7 +135,6 @@ function handleLoginClick(event) {
     padding: 10px;
     text-align: center;
     border-radius: 5px;
+    font-size: 0.9rem;
   }
-
-
 </style>

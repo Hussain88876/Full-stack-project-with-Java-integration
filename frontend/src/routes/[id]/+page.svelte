@@ -181,7 +181,9 @@
       <p class="article-date">{formatDate(data.date)}</p>
       {#if data.isLoggedIn}
         {#if data.user.user_id == data.user_id || data.user.is_admin}
-          <button type="button" on:click={deleteArticle} class="toggle-comments-btn">Delete Article</button>
+          <button type="button" on:click={deleteArticle} class="toggle-comments-btn"
+            >Delete Article</button
+          >
           <button on:click={goEdit} class="toggle-comments-btn">Edit</button>
         {/if}
         <link
@@ -228,169 +230,182 @@
 
 <style>
   :global(html),
-  :global(body),
-  .article-date {
-    zoom: 0.9;
+  :global(body) {
+    /* Remove zoom hack, handle sizing with efficient CSS */
   }
 
   .container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    gap: 2rem;
+    padding-top: 2rem;
+    height: calc(100vh - 100px); /* Adjust for nav */
+    overflow: hidden;
+  }
+
+  /* Glass Panels */
+  .article-post,
+  .comment-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
+    padding: 2rem;
+    height: 100%;
+    overflow-y: auto;
+    color: var(--text-main);
   }
 
   .article-post {
-    width: 45vw;
-    padding: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    text-align: left;
-    transition: transform 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(4px);
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-
-  .article-post::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .article-post::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-  }
-
-  .article-post::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-  }
-
-  .article-post::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    flex: 2;
+    max-width: 800px;
   }
 
   .comment-container {
-    margin-left: 50px;
-    width: 30vw;
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    max-height: 92vh;
-    overflow-y: auto;
-    padding: 10px;
+    flex: 1;
+    min-width: 300px;
+    margin-left: 0; /* Handled by gap */
+    max-height: 100%;
+    /* display is handled inline by svelte for logic */
   }
 
+  /* Typography */
+  .article-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+
+  .article-author {
+    color: var(--primary);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+
+  .article-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-main);
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .article-date {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  /* Images */
+  .article-image {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .article-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Buttons */
+  button {
+    font-family: var(--font-body);
+    transition: all 0.2s;
+  }
+
+  .toggle-comments-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+  }
+
+  .toggle-comments-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .btn {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary);
+  }
+
+  .btn.red {
+    color: #ef4444; /* Tailwind red-500 equivalent */
+    background: rgba(239, 68, 68, 0.1);
+  }
+
+  .like-text {
+    margin-left: 0.5rem;
+    margin-right: 1.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  /* Comment Section Headers */
+  .leave-comment h2,
+  .comments-container h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+    padding-bottom: 0.25rem;
+  }
+
+  /* Scrollbars for these panels */
+  .article-post::-webkit-scrollbar,
   .comment-container::-webkit-scrollbar {
     width: 6px;
   }
 
+  .article-post::-webkit-scrollbar-track,
   .comment-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    background: transparent;
   }
 
+  .article-post::-webkit-scrollbar-thumb,
   .comment-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
   }
 
+  .article-post::-webkit-scrollbar-thumb:hover,
   .comment-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
   }
-
-  .comments-tile {
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-
-  .leave-comment,
-  .comments-container {
-    margin-bottom: 10px;
-  }
-
-  .leave-comment h2,
-  .comments-container h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-
-  .article-title {
-    font-size: 1.8em;
-    margin-bottom: 8px;
-    word-wrap: break-word;
-  }
-
-  .article-author {
-    font-size: 1em;
-    font-style: italic;
-    margin-bottom: 8px;
-  }
-
-  .article-text {
-    font-size: 1.1em;
-    line-height: 1.3;
-    margin-bottom: 12px;
-    word-wrap: break-word;
-  }
-
-  .article-date {
-    font-style: italic;
-    align-self: flex-end;
-    font-size: 0.8em;
-  }
-
-  .like-text {
-    color: white;
-  }
-
-  button {
-    cursor: pointer;
-    outline: 0;
-    color: #aaa;
-  }
-
-  .red {
-    color: red;
-  }
-
-  .btn {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    font-size: 1.6em;
-  }
-
-
-  .toggle-comments-btn {
-    cursor: pointer;
-    color: rgb(224, 224, 224);
-    text-decoration: none;
-    background-color: transparent;
-    border: 1px solid rgb(142, 142, 142);
-    border-radius: 4px;
-    padding: 3px 12px;
-    margin-right: 10px;
-    font: inherit;
-    outline: none;
-    transition:
-    background-color 0.3s,
-    color 0.3s,
-    transform 0.3s;
-}
-
-
-.toggle-comments-btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-    color: white;
-    transform: translateY(-2px);
-}
-
-  
-  
 </style>
