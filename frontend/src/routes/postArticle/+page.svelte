@@ -32,8 +32,10 @@
     error = false;
 
     // Validation check
-    if (imageWidth < 100 || imageWidth > 1200 || imageHeight < 100 || imageHeight > 1200) {
-      alert("Image dimensions must be between 100px and 1200px.");
+    if (imageWidth < 100 || imageWidth > 800 || imageHeight < 100 || imageHeight > 400) {
+      alert(
+        "Image dimensions must be between 100px and 800px for width and 100px and 400px for height."
+      );
       return;
     }
 
@@ -113,17 +115,16 @@
     <label for="image">
       <img src={image} alt="" width={imageWidth} height={imageHeight} />
     </label>
-    <label for="image width" class="dim-text"> Image width (min 100px, max 1200px): </label>
-    <input type="number" name="image width" bind:value={imageWidth} min="100" max="1200" required />
-    <label for="image height" class="dim-text"> Image height (min 100px, max 1200px): </label>
+    <label for="image width" class="dim-text"> Image width (min 100px, max 800px): </label>
+    <input type="number" name="image width" bind:value={imageWidth} min="100" max="800" required />
+    <label for="image height" class="dim-text"> Image height (min 100px, max 400px): </label>
     <input
       type="number"
       name="image height"
       bind:value={imageHeight}
       min="100"
-      max="1200"
+      max="400"
       required
-    />
     />
   {/if}
   <textarea id="postText" bind:value={text} rows="12" required />
