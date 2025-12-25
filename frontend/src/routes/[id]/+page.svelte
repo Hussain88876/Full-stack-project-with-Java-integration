@@ -318,8 +318,9 @@
   }
 
   .article-image img {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    /* width: 100%;  Removed to respect custom width */
+    /* height: auto; Removed to respect custom height */
     object-fit: cover;
     display: block;
   }
