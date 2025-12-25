@@ -175,7 +175,7 @@
             width={data.image_width}
             height={data.image_height}
             alt="hi"
-            class:full-width={!data.image_width}
+            class:full-width={!data.image_width || data.image_width == 0}
           />
         </h1>
       </div>

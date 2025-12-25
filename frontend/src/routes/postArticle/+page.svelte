@@ -15,8 +15,8 @@
   let user_id = data.user.user_id;
   let tempImage;
   let image;
-  $: imageWidth = 600;
-  $: imageHeight = 200;
+  $: imageWidth = 800;
+  $: imageHeight = 400;
 
   function handleImageSize() {
     // Validation logic is now handled in validation checks, not auto-resizing
@@ -32,8 +32,8 @@
     error = false;
 
     // Validation check
-    if (imageWidth < 50 || imageWidth > 1200 || imageHeight < 50 || imageHeight > 1200) {
-      alert("Image dimensions must be between 50px and 1200px.");
+    if (imageWidth < 100 || imageWidth > 1200 || imageHeight < 100 || imageHeight > 1200) {
+      alert("Image dimensions must be between 100px and 1200px.");
       return;
     }
 
@@ -113,16 +113,17 @@
     <label for="image">
       <img src={image} alt="" width={imageWidth} height={imageHeight} />
     </label>
-    <label for="image width" class="dim-text"> Image width (min 50px, max 1200px): </label>
-    <input type="number" name="image width" bind:value={imageWidth} min="50" max="1200" required />
-    <label for="image height" class="dim-text"> Image height (min 50px, max 1200px): </label>
+    <label for="image width" class="dim-text"> Image width (min 100px, max 1200px): </label>
+    <input type="number" name="image width" bind:value={imageWidth} min="100" max="1200" required />
+    <label for="image height" class="dim-text"> Image height (min 100px, max 1200px): </label>
     <input
       type="number"
       name="image height"
       bind:value={imageHeight}
-      min="50"
+      min="100"
       max="1200"
       required
+    />
     />
   {/if}
   <textarea id="postText" bind:value={text} rows="12" required />
