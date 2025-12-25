@@ -170,7 +170,13 @@
     {#if data.image != null}
       <div class="article-image">
         <h1>
-          <img src={data.image} width={data.image_width} height={data.image_height} alt="hi" />
+          <img
+            src={data.image}
+            width={data.image_width}
+            height={data.image_height}
+            alt="hi"
+            class:full-width={!data.image_width}
+          />
         </h1>
       </div>
     {/if}
@@ -315,6 +321,8 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
   }
 
   .article-image img {
@@ -323,6 +331,10 @@
     /* height: auto; Removed to respect custom height */
     object-fit: cover;
     display: block;
+  }
+
+  .article-image img.full-width {
+    width: 100%;
   }
 
   /* Buttons */
