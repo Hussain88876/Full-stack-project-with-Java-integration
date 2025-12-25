@@ -1,6 +1,6 @@
 {
-	"name": "web-lab-fullstack-frontend",
-	"version": "0.0.1",
+	"name": "fullstack-blog-project",
+	"version": "0.2.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
