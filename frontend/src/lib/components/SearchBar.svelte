@@ -1,20 +1,29 @@
 <script>
-  let searchQuery = "";
-  function caseInsensitiveSearch() {
-    searchQuery = searchQuery.toLowerCase();
+  import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
+
+  let searchQuery = $page.url.searchParams.get("q") || "";
+
+  function handleInput() {
+    const query = searchQuery.toLowerCase().trim();
+    if (query) {
+      goto(`?q=${encodeURIComponent(query)}`, { replaceState: true, keepFocus: true });
+    } else {
+      goto("?", { replaceState: true, keepFocus: true });
+    }
   }
 </script>
 
-<form id="form" class="search-form">
+<form id="form" class="search-form" on:submit|preventDefault>
   <input
     type="search"
     id="query"
     name="q"
-    placeholder="Search..."
+    placeholder="Search by content, username, or title..."
     class="search-input"
     bind:value={searchQuery}
+    on:input={handleInput}
   />
-  <button class="search-button" on:click={caseInsensitiveSearch}>Search</button>
 </form>
 
 <style>
@@ -33,26 +42,6 @@
     border: 1px solid rgb(142, 142, 142);
     border-radius: 4px;
     outline: none;
-  }
-
-  .search-button {
-    cursor: pointer;
-    color: rgb(224, 224, 224);
-    background-color: transparent;
-    border: 1px solid rgb(142, 142, 142);
-    border-radius: 4px;
-    padding: 8px 12px;
-    font: inherit;
-    outline: none;
-    transition:
-      background-color 0.3s,
-      color 0.3s,
-      transform 0.3s;
-  }
-
-  .search-button:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    color: white;
-    transform: translateY(-2px);
+    width: 350px;
   }
 </style>
