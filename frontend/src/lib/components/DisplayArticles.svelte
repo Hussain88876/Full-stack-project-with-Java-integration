@@ -1,3 +1,4 @@
+<!-- need to refactor this to fit both profile article display and home page display -->
 <script>
   import { onMount } from "svelte";
   import { ART_URL } from "$lib/js/api-urls.js";
@@ -237,6 +238,7 @@
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }

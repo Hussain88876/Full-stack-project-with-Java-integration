@@ -34,6 +34,14 @@
     editMode = !editMode;
   }
 
+  function getSnippet(html, wordCount) {
+    if (!html) return "";
+    const text = html.replace(/<[^>]*>?/gm, ""); // strip tags
+    const words = text.split(/\s+/);
+    if (words.length <= wordCount) return text;
+    return words.slice(0, wordCount).join(" ") + "...";
+  }
+
   async function deleteUser() {
     let user_id = data.user.user_id;
     let is_admin = data.user.is_admin;
@@ -88,7 +96,7 @@
   <title>Articles</title>
 </svelte:head>
 
-<div class="container">
+<div class="container" class:no-articles={articles.length === 0}>
   <div class="profile-container">
     {#if data.user}
       {#if editMode}
@@ -144,8 +152,19 @@
     <div class="articles-container">
       {#each articles as article}
         <button onclick={`window.location.href='/${article.article_id}'`} class="article-tile">
-          <h2 class="article-title">{article.title}</h2>
-          <p class="article-date">{article.date}</p>
+          {#if article.image}
+            <img src={article.image} alt={article.title} class="article-image" />
+          {/if}
+          {#if !article.image}
+            <img src="/images/logoNew.png" alt="Default" class="article-image" />
+          {/if}
+          <div class="article-content">
+            <h2 class="article-title">{article.title}</h2>
+            <p class="article-description">{getSnippet(article.text, 20)}</p>
+            <p class="author-name">{article.username}</p>
+            <p class="article-date">{article.date}</p>
+            <span class="read-more">Read More</span>
+          </div>
         </button>
       {/each}
     </div>
@@ -164,15 +183,22 @@
   .container {
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    margin: 50px auto 40px auto;
+    padding: 10px 40px;
+    max-width: 1600px;
+    width: 100%;
+  }
+
+  .container.no-articles {
     justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 40px;
-    padding: 10px;
   }
 
   .profile-container {
     width: 30%;
-    margin: 0 auto;
+    max-width: 400px;
+    flex-shrink: 0;
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -242,16 +268,15 @@
   }
 
   .articles-container {
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    padding-left: 15%;
-    width: 100%;
+    align-content: flex-start;
+    gap: 15px;
     max-height: 70vh;
-    margin-top: 10px;
     overflow-y: auto;
-    padding-right: 0px;
-    margin-right: -200px;
+    padding: 10px;
   }
 
   .articles-container::-webkit-scrollbar {
@@ -273,18 +298,20 @@
   }
 
   .article-tile {
-    width: calc(27%);
-    height: 130px;
-    margin-top: 5px;
-    margin-bottom: 35px;
-    padding: 10px;
+    width: 220px;
+    height: 320px;
+    margin: 0;
+    padding: 0;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     text-align: left;
     transition: transform 0.3s ease;
-    margin-right: 50px;
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(4px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
   }
 
   .article-tile:hover {
@@ -292,18 +319,65 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
+  .article-image {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+  }
+
+  .article-content {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
   .article-title {
-    font-size: 1.9em;
+    font-size: 1.1em;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: 0 0 8px 0;
+    color: white;
+  }
+
+  .article-description {
+    font-size: 0.85em;
+    color: #ddd;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .author-name {
+    font-size: 0.9em;
+    font-style: italic;
+    margin: 0;
+    color: #eee;
   }
 
   .article-date {
+    font-size: 0.8em;
     font-style: italic;
-    align-self: flex-end;
-    font-size: 1.2em;
+    margin: 2px 0 0 0;
+    color: #ddd;
+  }
+
+  .read-more {
+    margin-top: 8px;
+    align-self: flex-start;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 0.8em;
   }
 </style>
