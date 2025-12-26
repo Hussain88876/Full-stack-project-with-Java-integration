@@ -115,6 +115,9 @@
         {#if article.image}
           <img src={article.image} alt={article.title} class="article-image" />
         {/if}
+        {#if !article.image}
+          <img src="/images/logoNew.png" alt="Default" class="article-image" />
+        {/if}
         <div class="article-content">
           <h2 class="article-title">{article.title}</h2>
           <p class="article-description">{getSnippet(article.text, 20)}</p>
