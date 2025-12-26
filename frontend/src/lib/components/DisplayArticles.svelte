@@ -49,6 +49,14 @@
     articles = await fetchArticles();
   }
 
+  function getSnippet(html, wordCount) {
+    if (!html) return "";
+    const text = html.replace(/<[^>]*>?/gm, ""); // strip tags
+    const words = text.split(/\s+/);
+    if (words.length <= wordCount) return text;
+    return words.slice(0, wordCount).join(" ") + "...";
+  }
+
   onMount(async () => {
     articles = await fetchArticles();
   });
@@ -85,9 +93,16 @@
             .toLowerCase()
             .includes(q) || article.username.toLowerCase().includes(q)}
           <button onclick={`window.location.href='/${article.article_id}'`} class="article-tile">
-            <h2 class="article-title">{article.title}</h2>
-            <p class="author-name">{article.username}</p>
-            <p class="article-date">{article.date}</p>
+            {#if article.image}
+              <img src={article.image} alt={article.title} class="article-image" />
+            {/if}
+            <div class="article-content">
+              <h2 class="article-title">{article.title}</h2>
+              <p class="article-description">{getSnippet(article.text, 20)}</p>
+              <p class="author-name">{article.username}</p>
+              <p class="article-date">{article.date}</p>
+              <span class="read-more">Read More</span>
+            </div>
           </button>
         {/if}
       {/each}
@@ -95,15 +110,22 @@
   {/if}
 
   {#if q == null && articles.length > 0}
-    <div>
-      {#each articles as article}
-        <button onclick={`window.location.href='/${article.article_id}'`} class="article-tile">
+    {#each articles as article}
+      <button onclick={`window.location.href='/${article.article_id}'`} class="article-tile">
+        {#if article.image}
+          <img src={article.image} alt={article.title} class="article-image" />
+        {/if}
+        <div class="article-content">
           <h2 class="article-title">{article.title}</h2>
-          <p class="author-name">{article.username}</p>
-          <p class="article-date">{article.date}</p>
-        </button>
-      {/each}
-    </div>
+          <p class="article-description">{getSnippet(article.text, 20)}</p>
+          <div class="article-meta">
+            <p class="author-name">{article.username}</p>
+            <p class="article-date">{article.date}</p>
+          </div>
+          <span class="read-more">Read More</span>
+        </div>
+      </button>
+    {/each}
   {/if}
 </div>
 
@@ -128,11 +150,12 @@
   .articles-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 20px;
     max-height: 83vh;
     margin-top: 60px;
     overflow-y: auto;
-    padding-right: 20px;
+    padding: 20px;
   }
 
   .articles-container::-webkit-scrollbar {
@@ -154,20 +177,21 @@
   }
 
   .article-tile {
-    width: 400px;
-    height: 180px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    padding: 20px;
+    width: 300px;
+    height: 420px;
+    margin: 0;
+    padding: 0;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     text-align: left;
     transition: transform 0.3s ease;
-    margin-right: 20px;
-    margin-left: 20px;
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(4px);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
   }
 
   .article-tile:hover {
@@ -175,24 +199,69 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
+  .article-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+  }
+
+  .article-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
   .article-title {
-    font-size: 1.7em;
+    font-size: 1.4em;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: 0 0 10px 0;
+    color: white;
+  }
+
+  .article-description {
+    font-size: 0.95em;
+    color: #ddd;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .article-meta {
+    margin-top: auto;
   }
 
   .author-name {
-    font-size: 1.5em;
+    font-size: 1em;
     font-style: italic;
+    margin: 0;
+    color: #eee;
   }
 
   .article-date {
-    font-size: 1.3em;
+    font-size: 0.9em;
     font-style: italic;
-    align-self: flex-end;
+    margin: 2px 0 0 0;
+    color: #ddd;
+  }
+
+  .read-more {
+    margin-top: 10px;
+    align-self: flex-start;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 0.9em;
   }
 
   .sort-buttons {
