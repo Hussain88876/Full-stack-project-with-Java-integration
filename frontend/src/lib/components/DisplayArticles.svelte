@@ -87,26 +87,27 @@
 
 <div class="articles-container">
   {#if q != null && articles.length > 0}
-    <div>
-      {#each articles as article}
-        {#if article.text.toLowerCase().includes(q) || article.title
-            .toLowerCase()
-            .includes(q) || article.username.toLowerCase().includes(q)}
-          <button onclick={`window.location.href='/${article.article_id}'`} class="article-tile">
-            {#if article.image}
-              <img src={article.image} alt={article.title} class="article-image" />
-            {/if}
-            <div class="article-content">
-              <h2 class="article-title">{article.title}</h2>
-              <p class="article-description">{getSnippet(article.text, 20)}</p>
-              <p class="author-name">{article.username}</p>
-              <p class="article-date">{article.date}</p>
-              <span class="read-more">Read More</span>
-            </div>
-          </button>
-        {/if}
-      {/each}
-    </div>
+    {#each articles as article}
+      {#if article.text.toLowerCase().includes(q) || article.title
+          .toLowerCase()
+          .includes(q) || article.username.toLowerCase().includes(q)}
+        <button onclick={`window.location.href='/${article.article_id}'`} class="article-tile">
+          {#if article.image}
+            <img src={article.image} alt={article.title} class="article-image" />
+          {/if}
+          {#if !article.image}
+            <img src="/images/logoNew.png" alt="Default" class="article-image" />
+          {/if}
+          <div class="article-content">
+            <h2 class="article-title">{article.title}</h2>
+            <p class="article-description">{getSnippet(article.text, 20)}</p>
+            <p class="author-name">{article.username}</p>
+            <p class="article-date">{article.date}</p>
+            <span class="read-more">Read More</span>
+          </div>
+        </button>
+      {/if}
+    {/each}
   {/if}
 
   {#if q == null && articles.length > 0}
