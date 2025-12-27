@@ -19,17 +19,21 @@
         throw new Error("Failed to fetch articles");
       }
       let data = await response.json();
-      data.forEach((article) => {
-        article.text = decodeHtml(article.text);
-        article.date = formatDate(article.date);
-      });
+
+      // Sort BEFORE formatting dates
       if (sortBy === "date") {
-        data.sort((a, b) => b.date.localeCompare(a.date));
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
       } else if (sortBy === "username") {
         data.sort((a, b) => a.username.localeCompare(b.username));
       } else if (sortBy === "title") {
         data.sort((a, b) => a.title.localeCompare(b.title));
       }
+
+      // Format dates AFTER sorting
+      data.forEach((article) => {
+        article.text = decodeHtml(article.text);
+        article.date = formatDate(article.date);
+      });
 
       return data;
     } catch (error) {
