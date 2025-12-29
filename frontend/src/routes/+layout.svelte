@@ -22,10 +22,6 @@
     await invalidateAll();
     goto("/login");
   }
-
-  function toggleLoginPage() {
-    dispatch("toggleSignUpForm");
-  }
 </script>
 
 <nav class="glass-nav">

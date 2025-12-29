@@ -284,6 +284,7 @@
     font-size: 2.5rem;
     line-height: 1.2;
     background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 1rem;
