@@ -8,7 +8,18 @@
   let serverResponse = null;
   const eventDispatch = createEventDispatcher();
 
+  export let defer = false;
+
   async function handleSubmit() {
+    if (defer) {
+      if (filesToUpload && filesToUpload.length > 0) {
+        const file = filesToUpload[0];
+        const previewUrl = URL.createObjectURL(file);
+        eventDispatch("upload", { file, imageUrl: previewUrl });
+      }
+      return;
+    }
+
     const formData = new FormData();
     formData.append("message", messageToSend);
     formData.append("image-file", filesToUpload[0]);

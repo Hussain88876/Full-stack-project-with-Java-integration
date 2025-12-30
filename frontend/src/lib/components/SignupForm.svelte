@@ -5,6 +5,7 @@
   import ImageUpload from "$lib/components/ImageUpload.svelte";
   import { writable } from "svelte/store";
   import { goto } from "$app/navigation";
+  import { uploadImage } from "$lib/js/upload-helper.js";
 
   let firstName = "";
   let lastName = "";
@@ -26,12 +27,15 @@
   ]);
   let selectedAvatar = "1";
 
+  let uploadedFiles = new Map();
+
   function setImage(imgurl1) {
     avatar = imgurl1;
     console.log(avatar);
   }
   function handleUpload(event) {
-    const { imageUrl } = event.detail;
+    const { file, imageUrl } = event.detail;
+    uploadedFiles.set(imageUrl, file);
     images.update((imgs) => [...imgs, imageUrl]);
   }
 
@@ -48,7 +52,19 @@
     error = false;
     if (username_error || password_error) {
       error = true;
+      error = true;
       return;
+    }
+
+    if (uploadedFiles.has(avatar)) {
+      try {
+        const file = uploadedFiles.get(avatar);
+        avatar = await uploadImage(file);
+      } catch (e) {
+        console.error("Avatar upload failed:", e);
+        error = true;
+        return;
+      }
     }
 
     const response = await fetch(USER_URL, {
@@ -155,7 +171,7 @@
             <img src={imgurl1} alt="Profile Icon 1" />
           </label>
         {/each}
-        <ImageUpload on:upload={handleUpload} />
+        <ImageUpload on:upload={handleUpload} defer={true} />
 
         <button type="submit">Create Account</button>
 
