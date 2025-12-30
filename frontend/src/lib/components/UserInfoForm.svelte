@@ -4,6 +4,7 @@
   import { createEventDispatcher } from "svelte";
   import ImageUpload from "$lib/components/ImageUpload.svelte";
   import { writable } from "svelte/store";
+  import { uploadImage } from "$lib/js/upload-helper.js";
 
   export let user;
 
@@ -27,17 +28,31 @@
     "/images/penguin.png"
   ]);
 
+  let uploadedFiles = new Map();
+
   function setImage(imgurl1) {
     avatar = imgurl1;
     console.log(avatar);
   }
   function handleUpload(event) {
-    const { imageUrl } = event.detail;
+    const { file, imageUrl } = event.detail;
+    uploadedFiles.set(imageUrl, file);
     images.update((imgs) => [...imgs, imageUrl]);
   }
 
   //once user clicks save, sends info to backend to be updated.
   async function handleSave() {
+    if (uploadedFiles.has(avatar)) {
+      try {
+        const file = uploadedFiles.get(avatar);
+        avatar = await uploadImage(file);
+      } catch (e) {
+        console.error("Avatar upload failed:", e);
+        error = true;
+        return;
+      }
+    }
+
     const response = await fetch(`${USER_URL}/me`, {
       method: "PATCH",
       credentials: "include",
@@ -90,7 +105,7 @@
           <img src={imgurl1} alt="Profile Icon 1" />
         </label>
       {/each}
-      <ImageUpload on:upload={handleUpload} />
+      <ImageUpload on:upload={handleUpload} defer={true} />
 
       <div class="button-group">
         <button type="submit" class="btn-save">Save</button>

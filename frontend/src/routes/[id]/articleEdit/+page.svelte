@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import ImageUpload from "$lib/components/ImageUpload.svelte";
   import { goto } from "$app/navigation";
+  import { uploadImage } from "$lib/js/upload-helper.js";
 
   export let data;
 
@@ -42,6 +43,16 @@
         "Image dimensions must be between 100px and 800px for width and 100px and 400px for height."
       );
       return;
+    }
+
+    if (pendingImageFile) {
+      try {
+        image = await uploadImage(pendingImageFile);
+      } catch (e) {
+        console.error("Image upload failed:", e);
+        alert("Failed to upload image.");
+        return;
+      }
     }
 
     const response = await fetch(`${ART_URL}/${article_id}`, {
@@ -95,15 +106,19 @@
     }, 600);
   });
 
+  let pendingImageFile = null;
+
   function handleUpload(event) {
-    const { imageUrl } = event.detail;
+    const { file, imageUrl } = event.detail;
     tempImage = imageUrl;
     image = tempImage;
+    pendingImageFile = file;
   }
 
   function removeImage() {
     image = null;
     tempImage = null;
+    pendingImageFile = null;
     imageWidth = 800;
     imageHeight = 400;
   }
@@ -148,7 +163,7 @@
   {/if}
   <textarea id="postText" bind:value={text} rows="12" required />
 
-  <ImageUpload on:upload={handleUpload} />
+  <ImageUpload on:upload={handleUpload} defer={true} />
   <button type="submit" on:click={getText}>Save!</button>
   {#if error}<span class="error">Could not save!</span>{/if}
   {#if success}<span class="success">Saved!</span>
