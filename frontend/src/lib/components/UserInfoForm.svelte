@@ -72,6 +72,7 @@
   <input type="date" name="dob" bind:value={dob} required />
   <label for="password">Password:</label>
   <input type="password" name="password" bind:value={password} minlength="5" required />
+  <label for="description">Description:</label>
   <textarea bind:value={desc} rows="12" required />
 
   <label for="profileAvatar">Profile Avatar:</label>
@@ -95,12 +96,13 @@
         <button type="submit" class="btn-save">Save</button>
         <button type="button" on:click={cancel} class="btn-cancel">Cancel</button>
       </div>
-      {#if error}<span class="error">Could not save!</span>{/if}
-      {#if success}
-        <span class="success">Saved!</span>
-      {/if}
     </div>
   </div>
+
+  {#if error}<span class="error">Could not save!</span>{/if}
+  {#if success}
+    <span class="success">Saved!</span>
+  {/if}
 </form>
 
 <style>
