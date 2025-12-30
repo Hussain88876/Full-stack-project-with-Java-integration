@@ -100,6 +100,13 @@
     tempImage = imageUrl;
     image = tempImage;
   }
+
+  function removeImage() {
+    image = null;
+    tempImage = null;
+    imageWidth = 800;
+    imageHeight = 400;
+  }
 </script>
 
 <svelte:head
@@ -121,6 +128,12 @@
     <label for="image">
       <img src={image} alt="" width={imageWidth} height={imageHeight} />
     </label>
+    <button
+      type="button"
+      on:click={removeImage}
+      class="toggle-comments-btn"
+      style="margin-bottom: 10px;">Remove Image</button
+    >
     <label for="image width" class="dim-text"> Image width (min 100px, max 800px): </label>
     <input type="number" name="image width" bind:value={imageWidth} min="100" max="800" required />
     <label for="image height" class="dim-text"> Image height (min 100px, max 400px): </label>
@@ -143,6 +156,29 @@
 </form>
 
 <style>
+  .toggle-comments-btn {
+    cursor: pointer;
+    color: var(--btn-text);
+    text-decoration: none;
+    background-color: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 4px;
+    padding: 3px 12px;
+    margin-right: 10px;
+    font: inherit;
+    outline: none;
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      transform 0.3s;
+  }
+
+  .toggle-comments-btn:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+    transform: translateY(-2px);
+  }
+
   form {
     display: flex;
     width: 75%;
