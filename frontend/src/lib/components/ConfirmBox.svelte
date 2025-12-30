@@ -19,19 +19,31 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .box {
-    background: white;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    color: #333;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
   }
   button {
     margin: 5px;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #e5e5e5;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
   }
 </style>

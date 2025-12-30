@@ -200,9 +200,9 @@
     max-width: 400px;
     flex-shrink: 0;
     padding: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(4px);
   }
 
@@ -236,10 +236,10 @@
 
   .profile-actions button {
     cursor: pointer;
-    color: rgb(224, 224, 224);
+    color: #e5e5e5;
     text-decoration: none;
     background-color: transparent;
-    border: 1px solid rgb(142, 142, 142);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     padding: 8px 12px;
     margin-right: 10px;
@@ -252,7 +252,7 @@
   }
 
   .profile-actions button:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
     transform: translateY(-2px);
   }
@@ -284,17 +284,17 @@
   }
 
   .articles-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
   }
 
   .articles-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 8px;
   }
 
   .articles-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.35);
   }
 
   .article-tile {
@@ -302,11 +302,11 @@
     height: 320px;
     margin: 0;
     padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
     text-align: left;
     transition: transform 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(4px);
     overflow: hidden;
     display: flex;
@@ -316,14 +316,14 @@
 
   .article-tile:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
   }
 
   .article-image {
     width: 100%;
     height: 130px;
     object-fit: cover;
-    background-color: #f0f0f0;
+    background-color: #2a2a2a;
   }
 
   .article-content {
@@ -348,7 +348,7 @@
 
   .article-description {
     font-size: 0.85em;
-    color: #ddd;
+    color: #d4d4d4;
     margin-bottom: 8px;
     line-height: 1.3;
     display: -webkit-box;
@@ -362,14 +362,14 @@
     font-size: 0.9em;
     font-style: italic;
     margin: 0;
-    color: #eee;
+    color: #e5e5e5;
   }
 
   .article-date {
     font-size: 0.8em;
     font-style: italic;
     margin: 2px 0 0 0;
-    color: #ddd;
+    color: #d4d4d4;
   }
 
   .read-more {

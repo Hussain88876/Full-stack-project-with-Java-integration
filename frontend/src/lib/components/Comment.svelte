@@ -77,7 +77,12 @@
             <div class="success">Deleted!</div>
           {/if}
           {#if commentForm}
-            <CommentForm on:comment={commentChange} {data} {article_id} parent_comment_id={comment.comment_id} />
+            <CommentForm
+              on:comment={commentChange}
+              {data}
+              {article_id}
+              parent_comment_id={comment.comment_id}
+            />
           {/if}
         {/if}
 
@@ -94,97 +99,95 @@
 {/if}
 
 <style>
-
   .avatar {
-  
-    width:40px;
+    width: 40px;
     height: 40px;
     margin-right: 5px;
-  
   }
-  
-    .comment {
-      margin-bottom: 20px;
-      background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+
+  .comment {
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
-    }
-  
-    .comment-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-  
-    .comment-username {
-      margin: 0;
-      font-size: 1.2em;
-    }
-  
-    .comment-time {
-      font-size: 0.8em;
-      color: #3e3e3e;
-      margin-bottom: 10px;
-      margin-left: 20px;
-    }
-  
-    .comment-body {
-      padding: 10px;
-    }
-  
-    .comment-content {
-      font-size: 1.1em;
-      margin-bottom: 10px;
-      margin-left: 20px;
-    }
-  
-    .comment-actions {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-    }
-  
-    .reply-btn,
-    .delete-btn {
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 0.8em;
-      color: #3b3b3b;
-      margin-left: 4px;
-    }
-  
-    .reply-btn:hover,
-    .delete-btn:hover {
-      text-decoration: underline;
-    }
-  
-    .error,
-    .success {
-      padding: 5px 10px;
-      border-radius: 4px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-  
-    .error {
-      background-color: #f44336;
-      color: #fff;
-    }
-  
-    .success {
-      background-color: #4caf50;
-      color: #fff;
-    }
-  
-    .nested-comments {
-      margin-top: 10px;
-      margin-left: 15px;
-    }
-  </style>
-  
+  }
+
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .comment-username {
+    margin: 0;
+    font-size: 1.2em;
+  }
+
+  .comment-time {
+    font-size: 0.8em;
+    color: #9ca3af;
+    margin-bottom: 10px;
+    margin-left: 20px;
+  }
+
+  .comment-body {
+    padding: 10px;
+  }
+
+  .comment-content {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    color: #e5e5e5;
+  }
+
+  .comment-actions {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .reply-btn,
+  .delete-btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8em;
+    color: #d4d4d4;
+    margin-left: 4px;
+  }
+
+  .reply-btn:hover,
+  .delete-btn:hover {
+    text-decoration: underline;
+    color: #ffffff;
+  }
+
+  .error,
+  .success {
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .error {
+    background-color: #f44336;
+    color: #fff;
+  }
+
+  .success {
+    background-color: #4caf50;
+    color: #fff;
+  }
+
+  .nested-comments {
+    margin-top: 10px;
+    margin-left: 15px;
+  }
+</style>

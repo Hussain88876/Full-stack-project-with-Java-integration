@@ -6,7 +6,7 @@
 
   const dispatch = createEventDispatcher();
 
-  function commentChange(){
+  function commentChange() {
     dispatch(`comment`);
   }
 
@@ -32,19 +32,19 @@
         if (response.status === 204) {
           success = true;
           desc = "";
-          
+
           commentChange();
 
           setTimeout(() => {
-          success = false;
-        }, 1000);
+            success = false;
+          }, 1000);
         } else {
           error = true;
           desc = "";
-          
+
           setTimeout(() => {
-          error = false;
-        }, 1000);
+            error = false;
+          }, 1000);
         }
       } catch (error) {
         console.error("Error posting comment: ", error);
@@ -63,36 +63,41 @@
 </form>
 
 <style>
-
-.toggle-comments-btn {
+  .toggle-comments-btn {
     width: 100%;
     cursor: pointer;
-    color: rgb(0, 0, 0);
+    color: #e5e5e5;
     text-decoration: none;
-    background-color: transparent;
-    border: 1px solid rgb(142, 142, 142);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     padding: 3px 12px;
     margin-right: 10px;
     font: inherit;
     outline: none;
     transition:
-    background-color 0.3s,
-    color 0.3s,
-    transform 0.3s;
-}
+      background-color 0.3s,
+      color 0.3s,
+      transform 0.3s;
+  }
 
-
-.toggle-comments-btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-    color: rgb(0, 0, 0);
+  .toggle-comments-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
     transform: translateY(-2px);
-}
-  
+  }
+
   textarea {
     width: 100%;
-    background: #f7f7f7;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
+    color: #ffffff;
+    padding: 8px;
+  }
+
+  textarea::placeholder {
+    color: #9ca3af;
   }
 
   form {
@@ -107,10 +112,7 @@
   .error,
   .success {
     grid-column: 1 / 3;
-  
   }
-
-  
 
   .error,
   .success {

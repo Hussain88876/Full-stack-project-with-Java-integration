@@ -1,19 +1,18 @@
 :root {
-  /* Colors */
-  --bg-color: #0f172a;
-  --bg-gradient: radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+  /* Modern Black/White Theme Colors */
+  --bg-color: #0a0a0a;
+  --bg-gradient: none;
 
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
+  --text-main: #ffffff;
+  --text-muted: #9ca3af;
+  --text-secondary: #d4d4d4;
 
-  --primary: #8b5cf6;
-  --primary-hover: #7c3aed;
+  --primary: #e5e5e5;
+  --primary-hover: #ffffff;
 
   --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 
   /* Fonts */
   --font-heading: 'Outfit', sans-serif;
@@ -29,9 +28,6 @@ body {
   padding: 0;
   font-family: var(--font-body);
   background-color: var(--bg-color);
-  background-image: var(--bg-gradient);
-  background-attachment: fixed;
-  background-size: cover;
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
@@ -66,14 +62,14 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.35);
 }

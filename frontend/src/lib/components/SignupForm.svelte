@@ -1,92 +1,96 @@
 <script>
-    import { invalidate } from "$app/navigation";
-    import { USER_URL } from "$lib/js/api-urls.js";
-    import { onMount } from "svelte";
-    import ImageUpload from "$lib/components/ImageUpload.svelte";
-    import { writable } from "svelte/store";
-    import { goto } from "$app/navigation";
-  
-    let firstName = "";
-    let lastName = "";
-    let username = "";
-    let password = "";
-    let confirmPassword = "";
-    let dob = "";
-    let desc = "";
-    let error = false;
-    let success = false;
-    let avatar; 
-    let images =writable(["/images/cat.png", "/images/duck.png", "/images/bunny.png", "/images/squirrel.png", "/images/bear.png", "/images/penguin.png"])
-    let selectedAvatar = "1";
-  
-    function setImage(imgurl1) {
-      avatar=imgurl1;
-      console.log(avatar)
-  
-    }
-    function handleUpload(event) {
-      const { imageUrl } = event.detail;
-      images.update(imgs => [...imgs, imageUrl]);
-    }
-  
-    function adjustTextarea() {
-      const textarea = document.querySelector('textarea[name="description"]');
-      textarea.style.height = "auto"; 
-      textarea.style.height = textarea.scrollHeight + "px"; 
-    }
-    onMount(() => {
-      adjustTextarea();
-    });
-  
-    async function handleSubmit() {
-    error = false;
-    if(username_error|| password_error) {
-      error =true;
-      return
+  import { invalidate } from "$app/navigation";
+  import { USER_URL } from "$lib/js/api-urls.js";
+  import { onMount } from "svelte";
+  import ImageUpload from "$lib/components/ImageUpload.svelte";
+  import { writable } from "svelte/store";
+  import { goto } from "$app/navigation";
 
+  let firstName = "";
+  let lastName = "";
+  let username = "";
+  let password = "";
+  let confirmPassword = "";
+  let dob = "";
+  let desc = "";
+  let error = false;
+  let success = false;
+  let avatar;
+  let images = writable([
+    "/images/cat.png",
+    "/images/duck.png",
+    "/images/bunny.png",
+    "/images/squirrel.png",
+    "/images/bear.png",
+    "/images/penguin.png"
+  ]);
+  let selectedAvatar = "1";
+
+  function setImage(imgurl1) {
+    avatar = imgurl1;
+    console.log(avatar);
+  }
+  function handleUpload(event) {
+    const { imageUrl } = event.detail;
+    images.update((imgs) => [...imgs, imageUrl]);
+  }
+
+  function adjustTextarea() {
+    const textarea = document.querySelector('textarea[name="description"]');
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  }
+  onMount(() => {
+    adjustTextarea();
+  });
+
+  async function handleSubmit() {
+    error = false;
+    if (username_error || password_error) {
+      error = true;
+      return;
     }
-  
-      const response = await fetch(USER_URL, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, firstName, lastName, dob, desc, avatar, password })
-      });
-  
-      if (response.status === 401) {
-        error = true;
-      } else {
-        location.reload();
+
+    const response = await fetch(USER_URL, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, firstName, lastName, dob, desc, avatar, password })
+    });
+
+    if (response.status === 401) {
+      error = true;
+    } else {
+      location.reload();
+    }
+  }
+
+  let username_error;
+
+  async function checkName() {
+    username_error = null;
+    const response = await fetch(USER_URL);
+    const userList = await response.json();
+    userList.forEach((user) => {
+      if (user.username == username) {
+        username_error = "Username occupied";
       }
+    });
+  }
+
+  let password_error;
+
+  function checkPassword() {
+    password_error = null;
+    if (password !== confirmPassword) {
+      password_error = "Password dont match";
     }
-  
-    let username_error;
-    
-    async function checkName(){
-      username_error = null;
-      const response = await fetch(USER_URL);
-      const userList = await response.json()
-      userList.forEach(user => {
-        if(user.username == username){
-          username_error = "Username occupied"
-        }
-      });
-    }
-  
-    let password_error;
-  
-    function checkPassword(){
-      password_error = null;
-      if (password !== confirmPassword) {
-        password_error = "Password dont match";
-      }
-    }
-  
-  </script>
-  
-  <svelte:head>
-    <title>Create Account</title>
-  </svelte:head>
+  }
+</script>
+
+<svelte:head>
+  <title>Create Account</title>
+</svelte:head>
 
 <div class="container">
   <form on:submit|preventDefault={handleSubmit}>
@@ -161,63 +165,58 @@
       </div>
     </div>
   </form>
+</div>
 
-  </div>
-  
-  <style>
+<style>
+  form {
+    margin: auto;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
 
-
-
-      
-    form {
-      margin: auto;
-      max-width: 500px;
-      border: 2px solid #4caf50;
-      border-radius: 10px;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 20px;
-      background-color: rgba(255, 255, 255, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    
   ::-webkit-scrollbar {
     width: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.35);
   }
 
   input[type="text"],
   textarea {
     width: 100%;
     padding: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
     font-size: 14px;
     transition: border-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
   }
 
   input[type="text"]:focus,
   textarea:focus {
-    border-color: #555555;
+    border-color: rgba(255, 255, 255, 0.4);
     outline: none;
   }
 
@@ -225,17 +224,19 @@
   textarea {
     width: 100%;
     padding: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
     font-size: 14px;
     transition: border-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
   }
 
   input[type="text"]:focus,
   textarea:focus {
-    border-color: #555555;
+    border-color: rgba(255, 255, 255, 0.4);
     outline: none;
   }
 
@@ -243,33 +244,35 @@
   textarea {
     width: 100%;
     padding: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
     transition: border-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
   }
 
   input[type="date"]:focus,
   textarea:focus {
-    border-color: #555555;
+    border-color: rgba(255, 255, 255, 0.4);
     outline: none;
   }
 
   button {
     padding: 10px 20px;
-    border: none;
-    background-color: rgba(66, 66, 66, 0.4);
-    border: 1px solid rgb(142, 142, 142);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 4px;
-    color: #fff;
+    color: #e5e5e5;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   button:hover {
-    background-color: rgba(66, 66, 66, 0.8);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
   }
 
   .error {

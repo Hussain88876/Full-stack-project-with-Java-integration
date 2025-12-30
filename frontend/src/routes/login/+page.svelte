@@ -84,8 +84,8 @@
     margin-top: 80px;
     margin-left: 22.5vw;
     max-width: 500px;
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
     padding: 20px;
     display: grid;
@@ -96,26 +96,28 @@
   input {
     width: 100%;
     padding: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
     font-size: 14px;
     transition: border-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
   }
 
   input:focus {
-    border-color: #555555;
+    border-color: rgba(255, 255, 255, 0.4);
     outline: none;
   }
 
   button {
     grid-column: 1 / 3;
     cursor: pointer;
-    color: rgb(224, 224, 224);
+    color: #e5e5e5;
     text-decoration: none;
-    background-color: rgba(66, 66, 66, 0.4);
-    border: 1px solid rgb(142, 142, 142);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     padding: 8px 12px;
     font: inherit;
@@ -124,7 +126,8 @@
   }
 
   button:hover {
-    background-color: rgba(66, 66, 66, 0.8);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
   }
 
   .error {

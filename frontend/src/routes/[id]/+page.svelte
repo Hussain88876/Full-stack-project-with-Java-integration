@@ -283,7 +283,7 @@
     font-family: var(--font-heading);
     font-size: 2.5rem;
     line-height: 1.2;
-    background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+    background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -291,7 +291,7 @@
   }
 
   .article-author {
-    color: var(--primary);
+    color: var(--text-secondary);
     font-weight: 500;
     margin-bottom: 2rem;
     font-size: 1rem;
@@ -369,11 +369,12 @@
     font-size: 1.25rem;
     color: var(--text-muted);
     background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--primary);
+    color: var(--text-main);
   }
 
   .btn.red {
@@ -395,7 +396,7 @@
     font-weight: 600;
     margin-bottom: 1.5rem;
     color: var(--text-main);
-    border-bottom: 2px solid var(--primary);
+    border-bottom: 2px solid var(--text-secondary);
     display: inline-block;
     padding-bottom: 0.25rem;
   }

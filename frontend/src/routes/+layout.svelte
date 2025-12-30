@@ -156,21 +156,21 @@
   .btn-logout {
     border: none;
     background: var(--primary);
-    color: white;
+    color: #0a0a0a;
     padding: 8px 20px;
     border-radius: 99px;
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
   }
 
   .btn-login:hover,
   .btn-logout:hover {
     background: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.25);
   }
 
   .container {
