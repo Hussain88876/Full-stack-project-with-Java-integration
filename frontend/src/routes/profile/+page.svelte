@@ -96,12 +96,10 @@
   <title>Articles</title>
 </svelte:head>
 
-<div class="container" class:no-articles={articles.length === 0}>
-  <div class="profile-container">
+<div class="container" class:edit-mode={editMode} class:no-articles={articles.length === 0}>
+  <div class="profile-container" class:hidden={editMode}>
     {#if data.user}
-      {#if editMode}
-        <UserInfoForm user={data.user} on:save={toggleEditMode} on:cancel={toggleEditMode} />
-      {:else}
+      {#if !editMode}
         <div class="profile-info">
           <div class="avatar-container">
             <img src={data.user.avatar} alt="avatar" class="avatar" />
@@ -140,6 +138,12 @@
     {/if}
   </div>
 
+  {#if editMode && data.user}
+    <div class="edit-form-container">
+      <UserInfoForm user={data.user} on:save={toggleEditMode} on:cancel={toggleEditMode} />
+    </div>
+  {/if}
+
   {#if showConfirmBox}
     <ConfirmBox
       message="Are you sure you want to delete your account?"
@@ -148,7 +152,7 @@
     />
   {/if}
 
-  {#if articles.length > 0}
+  {#if articles.length > 0 && !editMode}
     <div class="articles-container">
       {#each articles as article}
         <button onclick={`window.location.href='/${article.article_id}'`} class="article-tile">
@@ -191,7 +195,23 @@
     width: 100%;
   }
 
+  .container.edit-mode {
+    justify-content: center;
+    align-items: center;
+  }
+
   .container.no-articles {
+    justify-content: center;
+  }
+
+  .profile-container.hidden {
+    display: none;
+  }
+
+  .edit-form-container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
     justify-content: center;
   }
 

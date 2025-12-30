@@ -23,6 +23,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
   }
   .box {
     background: #1a1a1a;

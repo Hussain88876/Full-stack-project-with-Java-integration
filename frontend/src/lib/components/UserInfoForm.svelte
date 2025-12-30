@@ -71,7 +71,7 @@
   <label for="dob">Date of birth:</label>
   <input type="date" name="dob" bind:value={dob} required />
   <label for="password">Password:</label>
-  <input type="text" name="password" bind:value={password} minlength="5" required />
+  <input type="password" name="password" bind:value={password} minlength="5" required />
   <textarea bind:value={desc} rows="12" required />
 
   <label for="profileAvatar">Profile Avatar:</label>
@@ -91,8 +91,10 @@
       {/each}
       <ImageUpload on:upload={handleUpload} />
 
-      <button type="submit">Save</button>
-      <button type="button" on:click={cancel}>Cancel</button>
+      <div class="button-group">
+        <button type="submit" class="btn-save">Save</button>
+        <button type="button" on:click={cancel} class="btn-cancel">Cancel</button>
+      </div>
       {#if error}<span class="error">Could not save!</span>{/if}
       {#if success}
         <span class="success">Saved!</span>
@@ -104,14 +106,19 @@
 <style>
   form {
     margin: auto;
-    max-width: 800px;
-    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 10px;
     max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
   }
 
   ::-webkit-scrollbar {
@@ -148,11 +155,37 @@
     transform: scale(1.1);
   }
 
-  button,
+  .button-group,
   textarea,
   .error,
   .success {
     grid-column: 1 / 3;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .btn-save,
+  .btn-cancel {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #e5e5e5;
+  }
+
+  .btn-save:hover,
+  .btn-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateY(-1px);
   }
 
   .error,
@@ -170,5 +203,32 @@
   .success {
     color: darkgreen;
     background-color: lightgreen;
+  }
+
+  input,
+  textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 8px;
+    border-radius: 4px;
+    font-family: inherit;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  label {
+    color: #e5e5e5;
+    font-weight: 500;
   }
 </style>
