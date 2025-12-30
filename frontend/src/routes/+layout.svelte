@@ -4,6 +4,7 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
   import { invalidateAll } from "$app/navigation";
+  import { theme, toggleTheme } from "$lib/js/theme.js";
 
   $: path = $page.url.pathname;
 
@@ -40,6 +41,13 @@
     </ul>
 
     <div class="nav-actions">
+      <button on:click={toggleTheme} class="btn-theme" title="Toggle theme">
+        {#if $theme === "dark"}
+          ☀️
+        {:else}
+          🌙
+        {/if}
+      </button>
       {#if data.isLoggedIn}
         <button on:click={handleLogout} class="btn-logout">Logout</button>
       {:else}
@@ -150,13 +158,33 @@
   .nav-actions {
     display: flex;
     align-items: center;
+    gap: 12px;
+  }
+
+  .btn-theme {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+  }
+
+  .btn-theme:hover {
+    background: var(--hover-bg, rgba(255, 255, 255, 0.1));
+    transform: scale(1.1);
   }
 
   .btn-login,
   .btn-logout {
     border: none;
     background: var(--primary);
-    color: #0a0a0a;
+    color: var(--primary-content);
     padding: 8px 20px;
     border-radius: 99px;
     font-weight: 600;

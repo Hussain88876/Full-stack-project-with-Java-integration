@@ -114,11 +114,10 @@
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 10px;
-    max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
     backdrop-filter: blur(4px);
   }
@@ -128,17 +127,17 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--scrollbar-track);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--scrollbar-thumb);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: var(--scrollbar-thumb-hover);
   }
 
   img {
@@ -178,15 +177,15 @@
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #e5e5e5;
+    border: 1px solid var(--btn-border);
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
   }
 
   .btn-save:hover,
   .btn-cancel:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
     transform: translateY(-1px);
   }
 
@@ -209,9 +208,9 @@
 
   input,
   textarea {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-main);
     padding: 8px;
     border-radius: 4px;
     font-family: inherit;
@@ -220,17 +219,17 @@
   input:focus,
   textarea:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--input-focus-border);
+    background-color: var(--input-bg); /* input-bg works for focus too or use hover-bg */
   }
 
   input::placeholder,
   textarea::placeholder {
-    color: #9ca3af;
+    color: var(--input-placeholder);
   }
 
   label {
-    color: #e5e5e5;
+    color: var(--label-color);
     font-weight: 500;
   }
 </style>

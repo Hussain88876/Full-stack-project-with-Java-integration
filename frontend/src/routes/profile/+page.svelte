@@ -167,7 +167,6 @@
             <p class="article-description">{getSnippet(article.text, 20)}</p>
             <p class="author-name">{article.username}</p>
             <p class="article-date">{article.date}</p>
-            <span class="read-more">Read More</span>
           </div>
         </button>
       {/each}
@@ -220,9 +219,9 @@
     max-width: 400px;
     flex-shrink: 0;
     padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--glass-bg);
     backdrop-filter: blur(4px);
   }
 
@@ -256,10 +255,10 @@
 
   .profile-actions button {
     cursor: pointer;
-    color: #e5e5e5;
+    color: var(--btn-text);
     text-decoration: none;
     background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--btn-border);
     border-radius: 4px;
     padding: 8px 12px;
     margin-right: 10px;
@@ -272,8 +271,8 @@
   }
 
   .profile-actions button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
     transform: translateY(-2px);
   }
   .avatar-container {
@@ -304,17 +303,17 @@
   }
 
   .articles-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--scrollbar-track);
     border-radius: 8px;
   }
 
   .articles-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--scrollbar-thumb);
     border-radius: 8px;
   }
 
   .articles-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: var(--scrollbar-thumb-hover);
   }
 
   .article-tile {
@@ -322,11 +321,11 @@
     height: 320px;
     margin: 0;
     padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
     text-align: left;
     transition: transform 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--glass-bg);
     backdrop-filter: blur(4px);
     overflow: hidden;
     display: flex;
@@ -363,12 +362,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0 0 8px 0;
-    color: white;
+    color: var(--text-main);
   }
 
   .article-description {
     font-size: 0.85em;
-    color: #d4d4d4;
+    color: var(--text-secondary);
     margin-bottom: 8px;
     line-height: 1.3;
     display: -webkit-box;
@@ -382,20 +381,20 @@
     font-size: 0.9em;
     font-style: italic;
     margin: 0;
-    color: #e5e5e5;
+    color: var(--text-secondary);
   }
 
   .article-date {
     font-size: 0.8em;
     font-style: italic;
     margin: 2px 0 0 0;
-    color: #d4d4d4;
+    color: var(--text-muted);
   }
 
   .read-more {
     margin-top: 8px;
     align-self: flex-start;
-    color: #fff;
+    color: var(--text-main);
     font-weight: bold;
     text-decoration: underline;
     font-size: 0.8em;

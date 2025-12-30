@@ -139,10 +139,10 @@
 <style>
   .toggle-comments-btn {
     cursor: pointer;
-    color: #e5e5e5;
+    color: var(--btn-text);
     text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--btn-bg);
+    border: 1px solid var(--btn-border);
     border-radius: 4px;
     padding: 3px 12px;
     margin-right: 10px;
@@ -155,8 +155,8 @@
   }
 
   .toggle-comments-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
     transform: translateY(-2px);
   }
 
@@ -165,9 +165,9 @@
     width: 75%;
     margin: auto;
     padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--glass-bg);
     backdrop-filter: blur(4px);
     display: grid;
     gap: 10px;
@@ -180,17 +180,17 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--scrollbar-track);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--scrollbar-thumb);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: var(--scrollbar-thumb-hover);
   }
 
   .title-wrapper {
@@ -224,9 +224,26 @@
   }
 
   .dim-text {
-    color: white;
+    color: var(--text-secondary);
   }
   .article-text {
-    color: white;
+    color: var(--text-main);
+  }
+
+  input,
+  textarea {
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-main);
+    padding: 8px;
+    border-radius: 4px;
+    font-family: inherit;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+    background-color: var(--input-bg);
   }
 </style>

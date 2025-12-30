@@ -42,6 +42,6 @@
 
 <style>
   .article-text {
-    color: white;
+    color: var(--text-main);
   }
 </style>

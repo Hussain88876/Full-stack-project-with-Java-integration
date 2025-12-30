@@ -107,8 +107,8 @@
 
   .comment {
     margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
   }
 
@@ -117,17 +117,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid var(--glass-border);
   }
 
   .comment-username {
     margin: 0;
     font-size: 1.2em;
+    color: var(--text-main);
   }
 
   .comment-time {
     font-size: 0.8em;
-    color: #9ca3af;
+    color: var(--text-muted);
     margin-bottom: 10px;
     margin-left: 20px;
   }
@@ -140,7 +141,7 @@
     font-size: 1.1em;
     margin-bottom: 10px;
     margin-left: 20px;
-    color: #e5e5e5;
+    color: var(--text-secondary);
   }
 
   .comment-actions {
@@ -158,14 +159,14 @@
     border: none;
     cursor: pointer;
     font-size: 0.8em;
-    color: #d4d4d4;
+    color: var(--text-secondary);
     margin-left: 4px;
   }
 
   .reply-btn:hover,
   .delete-btn:hover {
     text-decoration: underline;
-    color: #ffffff;
+    color: var(--text-main);
   }
 
   .error,

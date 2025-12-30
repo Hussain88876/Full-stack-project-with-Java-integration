@@ -84,8 +84,8 @@
     margin-top: 80px;
     margin-left: 22.5vw;
     max-width: 500px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
     padding: 20px;
     display: grid;
@@ -96,28 +96,28 @@
   input {
     width: 100%;
     padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--input-border);
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
     font-size: 14px;
     transition: border-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
+    background-color: var(--input-bg);
+    color: var(--text-main);
   }
 
   input:focus {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: var(--input-focus-border);
     outline: none;
   }
 
   button {
     grid-column: 1 / 3;
     cursor: pointer;
-    color: #e5e5e5;
+    color: var(--btn-text);
     text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--btn-bg);
+    border: 1px solid var(--btn-border);
     border-radius: 4px;
     padding: 8px 12px;
     font: inherit;
@@ -126,8 +126,8 @@
   }
 
   button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
   }
 
   .error {

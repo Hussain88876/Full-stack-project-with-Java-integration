@@ -66,10 +66,10 @@
   .toggle-comments-btn {
     width: 100%;
     cursor: pointer;
-    color: #e5e5e5;
+    color: var(--btn-text);
     text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--btn-bg);
+    border: 1px solid var(--btn-border);
     border-radius: 4px;
     padding: 3px 12px;
     margin-right: 10px;
@@ -82,22 +82,22 @@
   }
 
   .toggle-comments-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
     transform: translateY(-2px);
   }
 
   textarea {
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
     border-radius: 6px;
-    color: #ffffff;
+    color: var(--text-main);
     padding: 8px;
   }
 
   textarea::placeholder {
-    color: #9ca3af;
+    color: var(--input-placeholder);
   }
 
   form {

@@ -108,7 +108,6 @@
             <p class="article-description">{getSnippet(article.text, 20)}</p>
             <p class="author-name">{article.username}</p>
             <p class="article-date">{article.date}</p>
-            <span class="read-more">Read More</span>
           </div>
         </button>
       {/if}
@@ -131,7 +130,6 @@
             <p class="author-name">{article.username}</p>
             <p class="article-date">{article.date}</p>
           </div>
-          <span class="read-more">Read More</span>
         </div>
       </button>
     {/each}
@@ -190,11 +188,11 @@
     height: 420px;
     margin: 0;
     padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
     text-align: left;
     transition: transform 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--glass-bg);
     backdrop-filter: blur(4px);
     overflow: hidden;
     display: flex;
@@ -205,7 +203,7 @@
 
   .article-tile:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    box-shadow: var(--glass-shadow);
   }
 
   .article-image {
@@ -232,12 +230,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0 0 10px 0;
-    color: white;
+    color: var(--text-main);
   }
 
   .article-description {
     font-size: 0.95em;
-    color: #d4d4d4;
+    color: var(--text-secondary);
     margin-bottom: 10px;
     line-height: 1.4;
     display: -webkit-box;
@@ -255,20 +253,20 @@
     font-size: 1em;
     font-style: italic;
     margin: 0;
-    color: #e5e5e5;
+    color: var(--text-secondary);
   }
 
   .article-date {
     font-size: 0.9em;
     font-style: italic;
     margin: 2px 0 0 0;
-    color: #d4d4d4;
+    color: var(--text-muted);
   }
 
   .read-more {
     margin-top: 10px;
     align-self: flex-start;
-    color: #fff;
+    color: var(--text-main);
     font-weight: bold;
     text-decoration: underline;
     font-size: 0.9em;
@@ -283,15 +281,15 @@
   .sort-text {
     margin-right: 10px;
     font-weight: bold;
-    color: #e5e5e5;
+    color: var(--text-secondary);
   }
 
   .sort-button {
     cursor: pointer;
-    color: #e5e5e5;
+    color: var(--btn-text);
     text-decoration: none;
     background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--btn-border);
     border-radius: 4px;
     padding: 8px 12px;
     font: inherit;
@@ -307,14 +305,14 @@
   }
 
   .sort-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
     transform: translateY(-2px);
   }
 
   .sort-button.active {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
     transform: translateY(-2px);
   }
 

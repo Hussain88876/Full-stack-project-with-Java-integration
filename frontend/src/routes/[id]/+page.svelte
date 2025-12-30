@@ -283,10 +283,7 @@
     font-family: var(--font-heading);
     font-size: 2.5rem;
     line-height: 1.2;
-    background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-main);
     margin-bottom: 1rem;
   }
 
@@ -344,8 +341,8 @@
   }
 
   .toggle-comments-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
     color: var(--text-main);
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -355,8 +352,9 @@
   }
 
   .toggle-comments-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--btn-hover-bg);
     transform: translateY(-1px);
+    color: var(--btn-hover-text);
   }
 
   .btn {
@@ -368,13 +366,13 @@
     border-radius: 50%;
     font-size: 1.25rem;
     color: var(--text-muted);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
   }
 
   .btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-main);
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
   }
 
   .btn.red {
@@ -414,12 +412,12 @@
 
   .article-post::-webkit-scrollbar-thumb,
   .comment-container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--scrollbar-thumb);
     border-radius: 3px;
   }
 
   .article-post::-webkit-scrollbar-thumb:hover,
   .comment-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--scrollbar-thumb-hover);
   }
 </style>

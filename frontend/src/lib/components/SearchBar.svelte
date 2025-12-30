@@ -39,15 +39,15 @@
     margin-right: 10px;
     padding: 8px 12px;
     font: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--input-border);
     border-radius: 4px;
     outline: none;
     width: 350px;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
+    background-color: var(--input-bg);
+    color: var(--text-main);
   }
 
   .search-input::placeholder {
-    color: #9ca3af;
+    color: var(--input-placeholder);
   }
 </style>

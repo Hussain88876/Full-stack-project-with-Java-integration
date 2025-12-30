@@ -171,13 +171,13 @@
   form {
     margin: auto;
     max-width: 500px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--glass-border);
     border-radius: 10px;
     padding: 20px;
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 20px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--glass-bg);
     max-height: 90vh;
     overflow-y: auto;
   }
@@ -187,36 +187,36 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--scrollbar-track);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--scrollbar-thumb);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: var(--scrollbar-thumb-hover);
   }
 
   input[type="text"],
   textarea {
     width: 100%;
     padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--input-border);
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
     font-size: 14px;
     transition: border-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
+    background-color: var(--input-bg);
+    color: var(--text-main);
   }
 
   input[type="text"]:focus,
   textarea:focus {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: var(--input-focus-border);
     outline: none;
   }
 
@@ -224,19 +224,19 @@
   textarea {
     width: 100%;
     padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--input-border);
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
     font-size: 14px;
     transition: border-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
+    background-color: var(--input-bg);
+    color: var(--text-main);
   }
 
   input[type="text"]:focus,
   textarea:focus {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: var(--input-focus-border);
     outline: none;
   }
 
@@ -244,35 +244,35 @@
   textarea {
     width: 100%;
     padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--input-border);
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
     transition: border-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
+    background-color: var(--input-bg);
+    color: var(--text-main);
   }
 
   input[type="date"]:focus,
   textarea:focus {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: var(--input-focus-border);
     outline: none;
   }
 
   button {
     padding: 10px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--btn-border);
+    background-color: var(--btn-bg);
     border-radius: 4px;
-    color: #e5e5e5;
+    color: var(--btn-text);
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
   }
 
   .error {
