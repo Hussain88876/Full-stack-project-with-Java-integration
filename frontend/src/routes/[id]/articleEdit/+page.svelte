@@ -164,7 +164,7 @@
   <textarea id="postText" bind:value={text} rows="12" required />
 
   <ImageUpload on:upload={handleUpload} defer={true} />
-  <button type="submit" on:click={getText}>Save!</button>
+  <button type="submit" class="toggle-comments-btn" on:click={getText}>Save!</button>
   {#if error}<span class="error">Could not save!</span>{/if}
   {#if success}<span class="success">Saved!</span>
   {/if}
