@@ -241,10 +241,13 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
     margin-bottom: 20px;
+    word-wrap: break-word;   
+    overflow-wrap: break-word; 
+    white-space: normal;  
   }
 
   .detail-label {
-    font-weight: bold;
+    font-weight: bold;   
   }
 
   .profile-actions {
