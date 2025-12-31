@@ -263,15 +263,6 @@
     color: var(--text-muted);
   }
 
-  .read-more {
-    margin-top: 10px;
-    align-self: flex-start;
-    color: var(--text-main);
-    font-weight: bold;
-    text-decoration: underline;
-    font-size: 0.9em;
-  }
-
   .sort-buttons {
     display: flex;
     justify-content: flex-end;

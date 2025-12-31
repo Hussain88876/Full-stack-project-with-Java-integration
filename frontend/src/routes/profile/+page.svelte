@@ -394,12 +394,5 @@
     color: var(--text-muted);
   }
 
-  .read-more {
-    margin-top: 8px;
-    align-self: flex-start;
-    color: var(--text-main);
-    font-weight: bold;
-    text-decoration: underline;
-    font-size: 0.8em;
-  }
+  
 </style>
