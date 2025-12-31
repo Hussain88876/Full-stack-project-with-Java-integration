@@ -87,8 +87,8 @@
   <input type="date" name="dob" bind:value={dob} required />
   <label for="password">Password:</label>
   <input type="password" name="password" bind:value={password} minlength="5" required />
-  <label for="description">Description:</label>
-  <textarea bind:value={desc} rows="12" required />
+  <label for="description">Description (Max 500 characters):</label>
+  <textarea bind:value={desc} rows="12" maxlength="500" required />
 
   <label for="profileAvatar">Profile Avatar:</label>
   <div>
@@ -98,7 +98,8 @@
           <input
             type="radio"
             name="profileAvatar"
-            value="1"
+            value={imgurl1}
+            bind:group={avatar}
             on:click={() => setImage(imgurl1)}
             required
           />
