@@ -2,7 +2,7 @@
 
 > **Prerequisite:** This project utilises Node v20.
 
-This was a collaborative project developed over a two-week sprint. It is a full-stack blogging and social media system that utilises RESTful APIs and a SQLite database to handle **Data Persistence** (permanent local changes) regarding account creation, content management, and administrative controls.
+This was a collaborative project developed over a two-week sprint, after which I have continued to make individual improvements.. It is a full-stack blogging and social media system that utilises RESTful APIs and a SQLite database to handle **Data Persistence** (permanent local changes) regarding account creation, content management, and administrative controls.
 
 Uniquely, this project integrates a **Java Swing GUI** as a dedicated backend administration tool, demonstrating cross-application communication.
 
