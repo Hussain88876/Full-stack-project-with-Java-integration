@@ -16,7 +16,7 @@ This project incorporates essential and intermediate programming principles, inc
 ## Features
 
 ### User Platform (Svelte/Node.js)
-* **Secure Authentication:** User registration and login flows.
+* **Custom Secure Authentication:** User registration and login flows.
 * **Security:** Implementation of password hashing and salting.
 * **CRUD Operations:** Permanent creation, editing, and deletion of user profiles.
 * **Content Management:** Permanent uploading of pictures, blogs, and comments.
